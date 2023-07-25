@@ -1,4 +1,5 @@
 {
     "rewrites":
-        [{"source": "/", "destination": "/pages"}]
+        [{"source": "/", "destination": "/app/pages/index.html"}]
 }
+
