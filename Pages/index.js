@@ -1,6 +1,6 @@
 
 function Home(){
-    return <div>Home BPM testes</div>
+    return <div>Home BPM testesssss</div>
 }
 
 export default Home
