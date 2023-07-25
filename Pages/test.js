@@ -2,8 +2,8 @@
 export default function Test() {
     return(
         <>
-            <div>Págeina de teste</div>
-            <div>Saporra não funciona?</div>
+            <div>Página de teste</div>
+            <div>Saporra não funciona?sa</div>
         </>
     )
 }
