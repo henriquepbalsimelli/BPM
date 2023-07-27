@@ -1,25 +1,12 @@
-import * as S from '../assets/style/HomeStyle'
-import Link from "next/link"
+import Header from '../components/Header/index'
 
 export default function Home() {
 
     return (
         <>
-            <S.flexContainer>
-                <Link href='/shop'>
-                        Loja
-                </Link>
-                <Link href='/shop'>
-                        Album de Stickers
-                </Link>
-                <Link href='/artgallery'>
-                        Galeria de arte
-                </Link>
-                <Link href='/videosanimations'>
-                        Vídeos e Animações
-                </Link>
-            </S.flexContainer>
-
+        
+            <Header/>
+        
         </>
     )
 }
