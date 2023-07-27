@@ -1,4 +1,5 @@
 import Logo from '../Logo'
+import Configs from '../PageConfigs'
 import User from '../User'
 import * as S from './style'
 
@@ -9,6 +10,7 @@ export default function Header () {
                 <S.FlexSubContainer>
                     <User/>
                     <Logo/>
+                    <Configs/>
                     
                 </S.FlexSubContainer>
 
