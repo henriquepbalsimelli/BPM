@@ -1,9 +1,12 @@
-export default function Index() {
+import Header from '../components/Header/index'
+
+export default function Home() {
 
     return (
         <>
-            <div>Index</div>
-            <div>Index</div>
+        
+            <Header/>
+        
         </>
     )
 }
