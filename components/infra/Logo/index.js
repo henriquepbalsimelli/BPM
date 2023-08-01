@@ -11,7 +11,7 @@ export default function Logo() {
                 width={100}
                 height={50}
                 src={LOGO_IMAGE_URL}
-                alt="Treinamento com a roberta arcoverde no alura cases, falando sobre o stackoverflow"
+                alt="Logo"
             />
             
         </>

@@ -1,4 +1,4 @@
-import Link from './../../components/Link'
+import Link from '../../components/infra/Link'
 
 export default function Shop() {
     return (
