@@ -4,6 +4,10 @@ export default function GlobalStyle() {
             body {
                 font-family: sans-serif;
                 margin: 0;
+            },
+            a {
+                color: #0070f3;
+                text-decoration: none;
             }
         `}</style>
     )

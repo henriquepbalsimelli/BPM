@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from "../../../components/infra/Link"
 import styled from "styled-components"
 
 export const FlexContainer = styled.div`

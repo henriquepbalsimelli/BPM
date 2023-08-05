@@ -3,13 +3,21 @@ import Configs from '../../PageConfigs'
 import User from '../../User'
 import * as S from './style'
 
+const LOGO_IMAGE_URL = '/images/bpm_logo.svg'
+
 export default function Header () {
     return (
         <>
             <S.FlexContainer>
                 <S.FlexSubContainer>
                     <User/>
-                    <Logo/>
+                    <Logo
+                        width={120}
+                        height={70}
+                        src={LOGO_IMAGE_URL}
+                        alt="Logo"
+                        priority={true}
+                    />
                     <Configs/>
                     
                 </S.FlexSubContainer>
