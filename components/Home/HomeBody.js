@@ -1,5 +1,5 @@
 
-export default function HomeBody( data ) {
+export default function HomeBody() {
     return(
         <>
             <main>
