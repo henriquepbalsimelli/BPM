@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 export default function Head({ title, description, image, url, googleAnalyticsId }) {
  
-    const src = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`
+    const src = `https://www.googletagmanager.com/gtag/js?id="${googleAnalyticsId}"`
 
     return (
     <NextHead>
@@ -18,7 +18,7 @@ export default function Head({ title, description, image, url, googleAnalyticsId
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
 
-                    gtag('config', ${googleAnalyticsId});
+                    gtag('config', "${googleAnalyticsId}");
                     `
                 }}
             />
