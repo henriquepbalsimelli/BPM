@@ -8,8 +8,6 @@ export async function getStaticProps(context) {
     console.log(GAID)
 
 
-    // The value of the `props` key will be
-    //  passed to the `Home` component
     return {
         props: {
             GAID
