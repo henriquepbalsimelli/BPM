@@ -1,13 +1,11 @@
 import Link from '../../components/infra/Link'
-import dados from '../../public/data/dados.json'
+import getData  from '../../services/index'
 
 export async function getStaticProps(context) {
-    // Get external data from the file system, API, DB, etc.
-    const posts = dados.posts
+    const data = await getData()
 
+    const posts = data.data
 
-    // The value of the `props` key will be
-    //  passed to the `Home` component
     return {
         props: {
             posts
