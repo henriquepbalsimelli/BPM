@@ -5,8 +5,6 @@ import HomeBody from '@/components/Home/HomeBody'
 export async function getStaticProps(context) {
     // Get external data from the file system, API, DB, etc.
     const GAID = process.env.GOOGLE_ANALYTICS_ID
-    console.log(GAID)
-
 
     return {
         props: {
