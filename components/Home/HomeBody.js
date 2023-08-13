@@ -3,7 +3,7 @@ export default function HomeBody() {
     return(
         <>
             <main>
-                HOME - Home
+                HOME - Home - release
             </main>
         </>
     )
