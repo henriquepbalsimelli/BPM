@@ -7,7 +7,7 @@ export const FlexContainer = styled.div`
     width: 100vw;
     background-color: #272727;
     justify-content: space-around;
-    height: 10vh;
+    height: fit-content;
     flex-direction: column;
 `
 
@@ -28,4 +28,8 @@ export const FlexSubContainer2 = styled.div `
     align-items: center;
     justify-content: space-around;
     width: 100vw;
+    a: {
+        text-decoration: none;
+        color: white;
+    }
 `
