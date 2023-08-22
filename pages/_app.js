@@ -1,10 +1,13 @@
+import AuthContext from '../contexts/AuthContext/Auth'
 import GlobalStyle from '../assets/style/GlobalStyle/GlobalStyle'
 
 function MyApp ({ Component, pageProps }) {
   return (
     <>
-        <GlobalStyle/>
-        <Component {...pageProps} />
+        <AuthContext>
+          <GlobalStyle/>
+          <Component {...pageProps} />
+        </AuthContext>
     </>
   )
 }

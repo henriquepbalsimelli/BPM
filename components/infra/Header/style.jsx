@@ -28,8 +28,5 @@ export const FlexSubContainer2 = styled.div `
     align-items: center;
     justify-content: space-around;
     width: 100vw;
-    a: {
-        text-decoration: none;
-        color: white;
-    }
+    margin: 1em 0em 1em 0em;
 `
