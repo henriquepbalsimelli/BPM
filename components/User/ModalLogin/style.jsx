@@ -18,6 +18,8 @@ export const ExitButton = styled.button`
     position: absolute;
     top: 0;
     right: 0;
+    border: none;
+    cursor: pointer;
 `
 
 export const Title = styled.h1`
@@ -35,5 +37,11 @@ export const Input = styled.input`
 `
 
 export const Button = styled.button`
-
+    margin: 1em;
+    border: none;
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+    border-radius: 4px;
+    height: 2em;
 `
