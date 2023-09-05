@@ -9,7 +9,6 @@ export default function Head({ title, description, image, url, googleAnalyticsId
 
     return (
     <NextHead>
-            {/* <!-- DESCOMENTAR QND FOR SUBIR PARA PROD --> */}
             <script async src={src}></script>
             <script
                 dangerouslySetInnerHTML={{
