@@ -14,7 +14,7 @@ export const Section = styled.section`
     width: 100vw;
     flex-direction: column;
     align-items: center;
-` 
+`
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -55,7 +55,7 @@ export const BrandName = styled.h2`
 export const ProductName = styled.h1`
     font-size: 900;
     margin: 0em 0em 0.5em 0em;
-` 
+`
 
 export const LinkContainer = styled.div`
     display: flex;

@@ -23,6 +23,9 @@ export default function Header () {
                 </S.FlexSubContainer>
 
                 <S.FlexSubContainer2>
+                    <S.NLink href='/'>
+                        Home
+                    </S.NLink>
                     <S.NLink href='/shop'>
                         Loja
                     </S.NLink>
