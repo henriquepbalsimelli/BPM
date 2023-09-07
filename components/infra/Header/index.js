@@ -23,10 +23,13 @@ export default function Header () {
                 </S.FlexSubContainer>
 
                 <S.FlexSubContainer2>
+                    <S.NLink href='/'>
+                        Home
+                    </S.NLink>
                     <S.NLink href='/shop'>
                         Loja
                     </S.NLink>
-                    <S.NLink href='/shop'>
+                    <S.NLink href='/stickeralbum'>
                         Album de Stickers
                     </S.NLink>
                     <S.NLink href='/artgallery'>

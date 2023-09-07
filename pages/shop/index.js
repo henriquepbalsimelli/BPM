@@ -1,14 +1,31 @@
-import Link from '../../components/infra/Link'
+import Head from '@/components/infra/Head'
+import Header from '@/components/infra/Header'
+import { getProducts } from '@/services/shopService/shopService'
+import ProductGalery from '@/components/Shop/productGalery/productGalery'
 
-export default function Shop() {
+export const getServerSideProps = async () => {
+    const data = await getProducts()
+
+    const products = data.data
+
+    return {
+        props: {
+            products
+        }
+    }
+
+}
+
+
+export default function Shop({ products }) {
     return (
         <>
-            <h1>
-                Shop
-            </h1>
-            <Link href="/">
-               Return Home
-            </Link>
+            <Head
+                title="The BPM - Loja"
+            />
+            <Header />
+            <ProductGalery products={products}/>
+            
         </>
     )
 }

@@ -1,3 +1,4 @@
+import { PrimaryButton } from '@fluentui/react'
 import styled from 'styled-components'
 
 export const UserContainer = styled.div`
@@ -15,3 +16,12 @@ export const Column = styled.div`
 export const FlexLine = styled.div`
     display: flex;
 `
+export const RegisterButton = styled(PrimaryButton)`
+    background-color: #000000;
+    border-color: white;
+    &:hover {
+        background-color: #3b3b3b;
+        border-color: white;
+        
+    }
+    `

@@ -1,10 +1,9 @@
+import * as S from './style'
 
 export default function HomeBody() {
-    return(
+    return (
         <>
-            <main>
-                HOME - Home
-            </main>
+            home
         </>
     )
 }
