@@ -1,5 +1,7 @@
+import Head from '@/components/infra/Head'
 import Link from '../../components/infra/Link'
 import getData  from '../../services/index'
+import Header from '@/components/infra/Header'
 
 export async function getStaticProps(context) {
     const data = await getData()
@@ -16,6 +18,10 @@ export async function getStaticProps(context) {
 export default function VideosAnimationsIndex({ posts }) {
     return (
         <>
+            <Head
+                title="The BPM - Galeria de arte"
+            />
+            <Header />
             <main>
                 {
                     posts.map((post) => {
