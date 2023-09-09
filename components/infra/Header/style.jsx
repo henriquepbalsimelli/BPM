@@ -1,3 +1,4 @@
+import { device } from "@/assets/style/GlobalStyle/GlobalStyle"
 import Link from "../../../components/infra/Link"
 import styled from "styled-components"
 
@@ -29,4 +30,8 @@ export const FlexSubContainer2 = styled.div `
     justify-content: space-around;
     width: 100vw;
     margin: 1em 0em 1em 0em;
+`
+
+export const ImgContainer = styled.div `
+    width: 20%;
 `
