@@ -6,19 +6,16 @@ import { useEffect, useState } from 'react'
 import { getCurrentDimension } from '@/assets/style/GlobalStyle/GlobalStyle'
 
 const LOGO_IMAGE_URL = '/images/bpm_logo.svg'
-import { useCollapse } from 'react-collapsed'
+import CollapseHeader from './CollapseHeader/CollapseHeader'
 
 
 export default function Header() {
-
-    const { getCollapseProps, getToggleProps, isExpanded } = useCollapse()
 
     const [widowSize, setWindowSize] = useState()
 
     useEffect(() => {
         const size = getCurrentDimension()
         setWindowSize(size)
-        console.log(size)
     }, [])
 
     return (
@@ -26,32 +23,7 @@ export default function Header() {
             <S.FlexContainer>
                 {
                     widowSize?.width < 768 ? (
-                        <div>
-                            <button {...getToggleProps()}>
-                                {isExpanded ? 'Collapse' : 'Expand'}
-                            </button>
-                            <section {...getCollapseProps()}>
-                                <ul>
-                                    <S.NLink href='/'>
-                                        <li>Home</li>
-                                    </S.NLink>
-                                    <S.NLink href='/shop'>
-                                        <li>Loja</li>
-                                    </S.NLink>
-                                    <S.NLink href='/stickeralbum'>
-                                        <li>Álbum de Stickers</li>
-                                    </S.NLink>
-                                    <S.NLink href='/artgallery'>
-                                        <li>Galeria de arte</li>
-                                    </S.NLink>
-                                    <S.NLink href='/videosanimations'>
-                                        <li>Vídeos e Animações</li>
-                                    </S.NLink>
-                                    <User />
-                                    <Configs />
-                                </ul>
-                            </section>
-                        </div>
+                        <CollapseHeader/>
                     ) : (
                         <>
                             <S.FlexSubContainer>
