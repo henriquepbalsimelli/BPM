@@ -34,4 +34,6 @@ export const FlexSubContainer2 = styled.div `
 
 export const ImgContainer = styled.div `
     width: 20%;
+    position: relative;
+    height: 10vh;
 `

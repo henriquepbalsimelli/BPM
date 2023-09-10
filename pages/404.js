@@ -14,7 +14,7 @@ export default function ErroPage() {
     return (
         <>
             <FlexContainer>
-            <div>
+            <div style={{position: 'relative'}}>
                 <Link href="/">
                     <Logo
                         width={300}
@@ -22,6 +22,7 @@ export default function ErroPage() {
                         src="/images/bpm_logo.svg"
                         alt="Logo"
                         priority={true}
+                        fill={true}
                     />
                 </Link>
                 <h1>Ta perdido irmão?</h1>

@@ -4,16 +4,14 @@ import Image from "next/image"
 
 
 
-export default function Logo({width, height, src, alt, priority}) {
+export default function Logo({ width, height, src, alt, priority, fill, sizes, styles }) {
     return (
         <>
             <Image
-                width={width}
-                height={height}
                 src={src}
                 alt={alt}
                 priority={priority}
-                layout="responsive"
+                fill={fill}	
             />
             
         </>
