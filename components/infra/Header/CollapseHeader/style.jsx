@@ -7,6 +7,7 @@ export const CollapseHeaderContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    background-color: #272727;
 `
 
 export const NLink = styled(Link)`
