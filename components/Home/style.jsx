@@ -13,7 +13,7 @@ export const Section = styled.section`
 
 
 export const ImgDiv = styled.div`
-    margin: 1em 0em 1em 0em;
+    margin: 1em 1em 1em 1em;
     display: flex;
     justify-content: center;
 `

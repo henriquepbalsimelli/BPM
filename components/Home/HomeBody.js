@@ -16,7 +16,7 @@ export default function HomeBody() {
                         style={{
                             width: '100%',
                             height: 'auto',
-                            maxWidth: '50%',
+                            maxWidth: '100%',
                             minWidth: '80%',
                         }}
                     />
