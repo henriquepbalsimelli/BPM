@@ -1,3 +1,4 @@
+import { device } from "@/assets/style/GlobalStyle/GlobalStyle";
 import { PrimaryButton } from "@fluentui/react";
 import { styled } from "styled-components";
 
@@ -14,19 +15,11 @@ export const Section = styled.section`
     width: 100vw;
     flex-direction: column;
     align-items: center;
-`
-export const Container = styled.div`
+    justify-content: center;
+    `
+export const ImgContainer = styled.div`
+    margin: 1em 1em 1em 1em;
     display: flex;
-    flex-direction: column;
-    width: 80%;
-    margin: 1em;
-    padding: 1em;
-`
-
-export const SubContainer = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
     padding: 1em;
 `
 
@@ -34,14 +27,19 @@ export const ProductInfoContainer = styled.div`
     display: flex;
     margin: 1em;
     flex-direction: column;
-    width: 40%;
+    padding: 1em;
+    max-width: 40em;
 `
 
-export const ImgContainer = styled.div`
+export const Container = styled.div`
     display: flex;
-    align-items: center ;
-    width: 35vw;
+    flex-direction: column;
+    @media ${device.laptop} {
+        flex-direction: row;
+    }
+
 `
+
 
 export const Img = styled.img`
     width: 100%;
@@ -78,6 +76,7 @@ export const Description = styled.p`
     border-top: 1px solid #dfdfdf;
     padding-bottom: 1em;
     padding-top: 1em;
+    max-width: 60vw;
 `
 
 export const ConfigContainer = styled.div`
