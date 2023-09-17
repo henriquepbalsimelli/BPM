@@ -71,12 +71,18 @@ export const Link = styled.a`
         color: green;
     }
 `
-export const Description = styled.p`
+
+export const ProductDesccriptionContainer = styled.div `
     border-bottom: 1px solid #dfdfdf;
     border-top: 1px solid #dfdfdf;
-    padding-bottom: 1em;
-    padding-top: 1em;
-    max-width: 60vw;
+    margin: 0em 0em 1em 0em;
+`
+
+export const Description = styled.p`
+    max-width: 100vw;
+    @media ${device.laptop} {
+        max-width: 70vw;
+    }
 `
 
 export const ConfigContainer = styled.div`

@@ -23,7 +23,9 @@ export default function ProductDetail({ product }) {
                         </S.ImgContainer>
                         <S.ProductInfoContainer>
                             <S.ProductName>{product.name}</S.ProductName>
-                            <S.Description>Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam inxigo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean.</S.Description>
+                            <S.ProductDesccriptionContainer>
+                                <S.Description>Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam inxigo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean.</S.Description>
+                            </S.ProductDesccriptionContainer>
                             <S.ConfigContainer >
                                 <S.ColorSpan>Color</S.ColorSpan>
                                 <div>
