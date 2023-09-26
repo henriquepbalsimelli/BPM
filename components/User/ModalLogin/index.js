@@ -2,6 +2,7 @@ import { Modal } from '@fluentui/react'
 import * as S from './style'	
 import { useState } from 'react'
 import { router } from 'next/router'
+import { authService } from '@/services/authService/authService'
 
 export default function ModalLogin({ open, setOpen }) {
     
@@ -25,7 +26,16 @@ export default function ModalLogin({ open, setOpen }) {
                     onSubmit={(e) => {
                         e.preventDefault()
                         console.log(values)
-                        router.push('/auth-page-ssr')
+                        authService.login({
+                            email: values.email,
+                            password: values.password
+                        })
+                        .then(()=>{
+                            router.push('/auth-page-ssr')
+                        })
+                        .catch((error)=> {
+                            alert('Usuário ou senha inválidos')
+                        })
                     }}
                 >
                     <S.Input placeholder="Nome" 
