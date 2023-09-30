@@ -24,7 +24,7 @@ export default function User() {
                                     Nome usuario
                                 </S.FlexLine>
                                 <S.FlexLine>
-                                    Moedas
+                                    Moedas 
                                 </S.FlexLine>
                             </S.Column>
                         </>
