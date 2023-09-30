@@ -54,7 +54,6 @@ export async function getProducts() {
 }
 
 export async function getProductDetail(id) {
-    console.log('id', id)
     const data = [
         {
             id: 1,
@@ -125,8 +124,6 @@ export async function getProductDetail(id) {
 
     const product = data.find((product) => product.id == id)
 
-    console.log('product', product)
-    
     return {
         product
     }

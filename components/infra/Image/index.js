@@ -1,19 +1,21 @@
 import React from "react"
-import * as S from "./style"
 import Image from "next/image"
 
 
 
-export default function Logo({ width, height, src, alt, priority, fill, sizes, styles }) {
+export default function ImageBpm({ width, height, src, alt, priority, sizes, style }) {
     return (
         <>
             <Image
+                width={width}
+                height={height}
                 src={src}
                 alt={alt}
                 priority={priority}
-                fill={fill}	
+                sizes={sizes}
+                style={style}
             />
-            
+
         </>
     )
 }
