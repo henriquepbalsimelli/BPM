@@ -1,3 +1,6 @@
+import nookies from "nookies"
+import { tokenService } from "@/services/authService/tokenService"
+
 export default function AuthPageSSR(props) {
     return (
         <>
@@ -9,4 +12,12 @@ export default function AuthPageSSR(props) {
             </pre>
         </>
     )
+}
+
+export async function getServerSideProps(context) {
+    return {
+        props: {
+            token: tokenService.get(context)
+        }
+    }
 }

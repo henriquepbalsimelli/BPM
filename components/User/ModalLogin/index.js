@@ -25,7 +25,6 @@ export default function ModalLogin({ open, setOpen }) {
                 <S.Form 
                     onSubmit={(e) => {
                         e.preventDefault()
-                        console.log(values)
                         authService.login({
                             email: values.email,
                             password: values.password
