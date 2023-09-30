@@ -26,5 +26,34 @@ export const tokenService = {
     delete(ctx=null){
         globalThis?.sessionStorage?.removeItem('accessToken')
         nookies.destroy(ctx, ACCESS_TOKEN_KEY)
+    },
+
+    async generateAccessToken(userId) {
+        return await jwt.sign(
+            { roles: ['user'] },
+            ACCESS_TOKEN_KEY,
+            { subject: userId, expiresIn: ONE_DAY }
+        );
+    },
+
+    async validateAccessToken(accessToken) {
+        return await jwt.verify(accessToken, ACCESSTOKEN_SECRET);
+    },
+
+    async generateRefreshToken(userId) {
+        return await jwt.sign(
+            {},
+            REFRESHTOKEN_SECRET,
+            { subject: userId, expiresIn: REFRESHTOKEN_EXPIRATION }
+        );
+    },
+    
+    async validateRefreshToken(refreshToken) {
+        return await jwt.verify(refreshToken, REFRESHTOKEN_SECRET);
+    },
+
+    async decodeToken(token) {
+        return await jwt.decode(token);
     }
+
 }

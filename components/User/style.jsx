@@ -24,4 +24,11 @@ export const RegisterButton = styled(PrimaryButton)`
         border-color: white;
         
     }
+    margin: 0em 0em 0.5em 0em;
     `
+
+export const ColumnContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+
+`
