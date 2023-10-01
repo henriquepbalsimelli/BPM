@@ -16,9 +16,7 @@ export const authService = {
     },
 
     signUp: async (credentials) => {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL
-        
-        const response = await HttpClient(`${API_URL}/api/sign-up`, {
+        const response = await HttpClient(`/api/sign-up`, {
             method: 'POST',
             body: credentials
         })
