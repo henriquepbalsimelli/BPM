@@ -3,9 +3,8 @@ import { tokenService } from "./tokenService"
 
 export const authService = {
     login: async (credentials) => {
-        const API_URL = process.env.NEXT_PUBLIC_API_URL
         
-        const response = await HttpClient(`${API_URL}/api/login`, {
+        const response = await HttpClient(`/api/login`, {
             method: 'POST',
             body: credentials
         })
