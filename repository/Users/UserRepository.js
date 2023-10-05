@@ -1,11 +1,19 @@
 import db from '../../src/lib/database'
 
 export const UserRepository = {
-    getUserByEmail: async() => {
+    getUserByEmail: async(email) => {
         const user = await db.select()
             .from('users')
-            .where('email', req.body.email)
+            .where('email', email)
             .first()
         return user
-    } 
+    },
+    getUserById: async(id) => {
+        const user = await db.select()
+            .from('users')
+            .where('id', id)
+            .first()
+        return user
+    },
+
 }

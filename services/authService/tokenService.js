@@ -1,12 +1,20 @@
-const ACCESS_TOKEN_KEY = 'accessToken'
 import nookies from "nookies"
+import jwt from 'jsonwebtoken';
+import { HttpClient } from "../../components/infra/HttpClient/HttpClient";
 
+const ACCESS_TOKEN_KEY = 'accessToken'
 const ONE_SECOND = 1
 const ONE_MINUTE = 60 * ONE_SECOND
 const ONE_HOUR = 60 * ONE_MINUTE
 const ONE_DAY = 24 * ONE_HOUR
 const ONE_MONTH = 30 * ONE_DAY
 const ONE_YEAR = 365 * ONE_DAY
+
+const REFRESHTOKEN_EXPIRATION = '7d';
+
+const REFRESHTOKEN_SECRET = process.env.REFRESHTOKEN_SECRET;
+
+const ACCESSTOKEN_SECRET = process.env.ACCESSTOKEN_SECRET;
 
 export const tokenService = {
     save(accessToken, ctx = null){
@@ -31,8 +39,8 @@ export const tokenService = {
     async generateAccessToken(userId) {
         return await jwt.sign(
             { roles: ['user'] },
-            ACCESS_TOKEN_KEY,
-            { subject: userId, expiresIn: ONE_DAY }
+            ACCESSTOKEN_SECRET,
+            { subject: `${userId}`, expiresIn: ONE_DAY }
         );
     },
 
@@ -44,7 +52,7 @@ export const tokenService = {
         return await jwt.sign(
             {},
             REFRESHTOKEN_SECRET,
-            { subject: userId, expiresIn: REFRESHTOKEN_EXPIRATION }
+            { subject: `${userId}`, expiresIn: REFRESHTOKEN_EXPIRATION }
         );
     },
     
@@ -54,6 +62,19 @@ export const tokenService = {
 
     async decodeToken(token) {
         return await jwt.decode(token);
+    },
+
+    isAuthenticated: async (req) => {
+        const authHeader = req.headers['x-authorization'] || req.headers['authorization'] || '';
+        const token = authHeader?.split(' ')[authHeader?.split(' ').length - 1];
+
+        try {
+            await authService.validateAccessToken(token);
+            return true;
+        } catch (err) {
+            return false;
+        }
     }
+
 
 }

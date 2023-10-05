@@ -1,5 +1,5 @@
 import db from '../../../src/lib/database'
-import hashService from '../../../src/utils/tools'
+import {generateHash} from '../../../src/utils/tools'
 
 export default async function handler (req, res) {
     const user = await db.select()
@@ -11,7 +11,7 @@ export default async function handler (req, res) {
         res.status(401).json({ message: 'Login Inválido XX' })
         return
     }
-    const hashedPassword = await hashService.generateHash(req.body.password)
+    const hashedPassword = await generateHash(req.body.password)
     
     const id = await db('users').insert({
         email: req.body.email,
