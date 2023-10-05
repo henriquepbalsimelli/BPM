@@ -11,7 +11,7 @@ export async function getServerSideProps(context) {
 export default function AuthPageSSR(props) {
     return (
         <>
-            <h1>AuthPage Server Side Renderig</h1>
+            <h1>AuthPageSSR</h1>
             <pre>
                 {
                     JSON.stringify(props.session, null, 2)
