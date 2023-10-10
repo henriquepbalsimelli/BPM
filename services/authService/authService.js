@@ -1,5 +1,6 @@
 import { HttpClient } from "@/components/infra/HttpClient/HttpClient"
 import { tokenService } from "./tokenService"
+import {getSessionData} from "@/pages/api/session"
 
 
 const ACCESSTOKEN_SECRET = process.env.ACCESSTOKEN_SECRET;
@@ -37,17 +38,10 @@ export const authService = {
     getSession: async (ctx) => {
         const token = tokenService.get(ctx)
 
-        return await HttpClient(`${API_URL}/api/session`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        .then((response) => {
-            if (!response.ok) throw new Error('Nao autrizado')
-            //tokenService.save(response.body.data)
-            return response.body.data
-        })
+        const session = await getSessionData(token)
+
+        return session
+
     
     }
 

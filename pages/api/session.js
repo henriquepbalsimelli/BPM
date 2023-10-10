@@ -1,6 +1,27 @@
 import { UserRepository } from "@/repository/Users/UserRepository";
 import { tokenService } from "@/services/authService/tokenService";
 
+export async function getSessionData(token){
+    try {
+
+        await tokenService.validateAccessToken(token);
+        const decodedToken = await tokenService.decodeToken(token);
+    
+        const user = await UserRepository.getUserById(decodedToken.sub);
+        const data = {
+            user: {
+                username: user.name,
+                email: user.email,
+            },
+            id: decodedToken.sub,
+            roles: decodedToken.roles
+        }
+        return data
+    }catch(err){
+        throw new Error(err);
+    }
+}
+
 export default async function handler(req, res) {
     const authHeader = req.headers['x-authorization'] || req.headers['authorization'] || '';
     const token = authHeader?.split(' ')[authHeader?.split(' ').length - 1];
@@ -8,12 +29,10 @@ export default async function handler(req, res) {
     if (!token) return res.status(401).json({ error: { status: 401, message: 'You don\'t have credentials' } });
 
     try {
-        await tokenService.validateAccessToken(token);
-        const decodedToken = await tokenService.decodeToken(token);
 
-        const user = await UserRepository.getUserById(decodedToken.sub);
+        const data = getSessionData(token);
         
-        if (user === null) {
+        if (data === null) {
             res.status(401).json({
                 error: {
                     status: 401,
@@ -22,16 +41,7 @@ export default async function handler(req, res) {
             });
         }
 
-        res.status(200).json({
-            data: {
-                user: {
-                    username: user.name,
-                    email: user.email,
-                },
-                id: decodedToken.sub,
-                roles: decodedToken.roles,
-            }
-        });
+        res.status(200).json(data);
         
 
     } catch (err) {

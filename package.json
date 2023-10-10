@@ -26,5 +26,10 @@
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
     "babel-plugin-styled-components": "^2.1.4"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }
