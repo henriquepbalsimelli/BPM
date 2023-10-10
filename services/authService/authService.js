@@ -3,12 +3,6 @@ import { tokenService } from "./tokenService"
 import {getSessionData} from "@/pages/api/session"
 
 
-const ACCESSTOKEN_SECRET = process.env.ACCESSTOKEN_SECRET;
-const ACCESSTOKEN_EXPIRATION = '1d';
-const REFRESHTOKEN_SECRET = process.env.REFRESHTOKEN_SECRET;
-const REFRESHTOKEN_EXPIRATION = '7d';
-const API_URL = process.env.API_URL;
-
 export const authService = {
     login: async (credentials) => {
         
@@ -43,6 +37,22 @@ export const authService = {
         return session
 
     
+    },
+
+    getSessionClientSide: async () => {
+        const token = tokenService.get()
+
+        return await HttpClient(`/api/session`, {
+            method: 'GET',
+            headers: {
+                'authorization': `Bearer ${token}`
+            }
+        })
+            .then((response) => {
+                if (!response.ok) throw new Error('Nao autrizado')
+                return response.body
+            })
+
     }
 
 }

@@ -31,7 +31,8 @@ export default function SignUpModal({ open, setOpen }) {
                             name: values.name
                         })
                             .then(() => {
-                                router.push('/auth-page-ssr')
+                                // router.push('/auth-page-ssr')
+                                router.push('/auth-page-static')
                             })
                             .catch((error) => {
                                 alert(error.message)

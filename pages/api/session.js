@@ -29,8 +29,7 @@ export default async function handler(req, res) {
     if (!token) return res.status(401).json({ error: { status: 401, message: 'You don\'t have credentials' } });
 
     try {
-
-        const data = getSessionData(token);
+        const data = await getSessionData(token);
         
         if (data === null) {
             res.status(401).json({
