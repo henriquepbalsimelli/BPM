@@ -1,4 +1,4 @@
-import { use, useContext, useState } from 'react'
+import { use, useContext, useEffect, useState } from 'react'
 import * as S from './style'
 import { AuthContext } from '@/contexts/AuthContext/Auth'
 import ModalLogin from './SignInModal/index'
@@ -6,15 +6,19 @@ import SignUpModal from './SignUpModal/index'
 
 export default function User() {
 
-    const [user, setUser] = useContext(AuthContext)
+    const [user, setUser, session] = useContext(AuthContext)
     const [loginModalState, setLoginModalState] = useState(false)
     const [registerModalState, setRegisterModalState] = useState(false)
+
+    useEffect(()=>{
+        console.log(session)
+    }, [])
 
     return (
         <>
             <S.UserContainer>
                 {
-                    user.name ? (
+                    session.user.username ? (
                         <>
                             <S.Column>
                                 Imagem
