@@ -30,7 +30,9 @@ export default function ModalLogin({ open, setOpen }) {
                             password: values.password
                         })
                         .then(()=>{
-                            router.push('/auth-page-ssr')
+                            // router.push('/auth-page-ssr')
+                            // router.push('/auth-page-static')
+                            window.location.reload()
                         })
                         .catch((error)=> {
                             alert(error.message)

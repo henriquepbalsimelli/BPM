@@ -1,30 +1,39 @@
-import { use, useContext, useState } from 'react'
+import { use, useContext, useEffect, useState } from 'react'
 import * as S from './style'
 import { AuthContext } from '@/contexts/AuthContext/Auth'
 import ModalLogin from './SignInModal/index'
 import SignUpModal from './SignUpModal/index'
+import { authService } from '@/services/authService/authService'
 
 export default function User() {
 
-    const [user, setUser] = useContext(AuthContext)
+    const [user, setUser, session] = useContext(AuthContext)
     const [loginModalState, setLoginModalState] = useState(false)
     const [registerModalState, setRegisterModalState] = useState(false)
+
 
     return (
         <>
             <S.UserContainer>
                 {
-                    user.name ? (
+                    session?.user ? (
                         <>
                             <S.Column>
-                                Imagem
+                                <S.RegisterButton
+                                        onClick={() =>{
+                                            authService.logout()
+                                            window.location.reload()
+                                        }}
+                                    >
+                                        Sair
+                                    </S.RegisterButton>
                             </S.Column>
                             <S.Column>
                                 <S.FlexLine>
-                                    Nome usuario
+                                    {session?.user?.username}
                                 </S.FlexLine>
                                 <S.FlexLine>
-                                    Moedas 
+                                    {session?.user?.coins_qty}
                                 </S.FlexLine>
                             </S.Column>
                         </>
