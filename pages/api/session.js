@@ -12,12 +12,14 @@ export async function getSessionData(token){
             user: {
                 username: user.name,
                 email: user.email,
+                coins: user.coins_qty
             },
             id: decodedToken.sub,
             roles: decodedToken.roles
         }
         return data
     }catch(err){
+        console.error(err)
         throw new Error(err);
     }
 }

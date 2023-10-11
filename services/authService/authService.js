@@ -42,6 +42,10 @@ export const authService = {
     getSessionClientSide: async () => {
         const token = tokenService.get()
 
+        if(!token){
+            return
+        }
+
         return await HttpClient(`/api/session`, {
             method: 'GET',
             headers: {
@@ -49,10 +53,17 @@ export const authService = {
             }
         })
             .then((response) => {
+                
                 if (!response.ok) throw new Error('Nao autrizado')
                 return response.body
             })
+            .catch((error)=>{
+                throw new Error(error)
+            })
 
+    },
+    logout: async () => {
+        tokenService.delete()
     }
 
 }

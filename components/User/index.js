@@ -3,6 +3,7 @@ import * as S from './style'
 import { AuthContext } from '@/contexts/AuthContext/Auth'
 import ModalLogin from './SignInModal/index'
 import SignUpModal from './SignUpModal/index'
+import { authService } from '@/services/authService/authService'
 
 export default function User() {
 
@@ -10,25 +11,29 @@ export default function User() {
     const [loginModalState, setLoginModalState] = useState(false)
     const [registerModalState, setRegisterModalState] = useState(false)
 
-    useEffect(()=>{
-        console.log(session)
-    }, [])
 
     return (
         <>
             <S.UserContainer>
                 {
-                    session.user.username ? (
+                    session?.user ? (
                         <>
                             <S.Column>
-                                Imagem
+                                <S.RegisterButton
+                                        onClick={() =>{
+                                            authService.logout()
+                                            window.location.reload()
+                                        }}
+                                    >
+                                        Sair
+                                    </S.RegisterButton>
                             </S.Column>
                             <S.Column>
                                 <S.FlexLine>
-                                    Nome usuario
+                                    {session?.user?.username}
                                 </S.FlexLine>
                                 <S.FlexLine>
-                                    Moedas 
+                                    {session?.user?.coins_qty}
                                 </S.FlexLine>
                             </S.Column>
                         </>

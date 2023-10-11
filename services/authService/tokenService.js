@@ -32,7 +32,7 @@ export const tokenService = {
     },
 
     delete(ctx=null){
-        globalThis?.sessionStorage?.removeItem('accessToken')
+        globalThis?.sessionStorage?.removeItem(ACCESS_TOKEN_KEY)
         nookies.destroy(ctx, ACCESS_TOKEN_KEY)
     },
 

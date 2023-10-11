@@ -1,13 +1,14 @@
+import { tokenService } from '@/services/authService/tokenService'
 import db from '../../../src/lib/database'
-import {generateHash} from '../../../src/utils/tools'
+import { generateHash } from '../../../src/utils/tools'
 
 export default async function handler (req, res) {
-    const user = await db.select()
+    const existingUser = await db.select()
         .from('users')
         .where('email', req.body.email)
         .first()
     
-    if (user) {
+    if (existingUser) {
         res.status(401).json({ message: 'Login Inválido XX' })
         return
     }
@@ -19,6 +20,12 @@ export default async function handler (req, res) {
         name: req.body.name
     })
 
-    res.status(200).json({ id: id })
+    const access_token = await tokenService.generateAccessToken(id);
+    const refresh_token = await tokenService.generateRefreshToken(id);
+    
+    res.status(200).json({ 
+        access_token: access_token,
+        refresh_token: refresh_token
+    })
     
 }

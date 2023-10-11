@@ -13,7 +13,9 @@ function AuthProvider({children}){
         const getSession = async () => {
             try {
                 const session = await authService.getSessionClientSide()
-                console.log(session)
+                if(!session){
+                    return
+                }
                 setSession(session)
                 setLoading(false)
 

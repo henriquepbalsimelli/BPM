@@ -11,7 +11,6 @@ function useSession(){
         const getSession = async () => {
             try{
                 const session = await authService.getSessionClientSide()
-    
                 setSession(session)
                 setLoading(false)
 

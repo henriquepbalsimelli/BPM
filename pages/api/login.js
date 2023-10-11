@@ -24,7 +24,6 @@ export default async function handler(req, res) {
     const refresh_token = await tokenService.generateRefreshToken(user.id);
     
     res.status(200).json({ 
-        message: 'Hello from Next.js!',
         access_token: access_token,
         refresh_token: refresh_token
     })
