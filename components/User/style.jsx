@@ -2,13 +2,15 @@ import { PrimaryButton } from '@fluentui/react'
 import styled from 'styled-components'
 
 export const UserContainer = styled.div`
+    width: 20%;
     margin: 1em 0em 0em 0em;
     display: flex;
+    justify-content: flex-end;
 `
+
 
 export const Column = styled.div`
     display: flex;
-    background-color: white;
     margin: 0.5em;
     flex-direction: column;
     justify-content: center;
@@ -16,6 +18,7 @@ export const Column = styled.div`
 
 export const FlexLine = styled.div`
     display: flex;
+    color: white;
 `
 export const RegisterButton = styled.button `
     height: 2em;
@@ -32,11 +35,12 @@ export const RegisterButton = styled.button `
         border-color: white;
         
     }
-    margin: 0em 0em 0.5em 0em;
+    margin: 0.2em;
     `
 
 export const ColumnContainer = styled.div`
     display: flex;
     flex-direction: column;
+    margin: 0em 1em 0em 0em;
 
 `

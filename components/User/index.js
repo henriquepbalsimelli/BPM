@@ -19,6 +19,14 @@ export default function User() {
                     session?.user ? (
                         <>
                             <S.Column>
+                                <S.FlexLine>
+                                    {session?.user?.username}
+                                </S.FlexLine>
+                                <S.FlexLine>
+                                    {session?.user?.coins_qty}
+                                </S.FlexLine>
+                            </S.Column>
+                            <S.Column>
                                 <S.RegisterButton
                                         onClick={() =>{
                                             authService.logout()
@@ -27,14 +35,6 @@ export default function User() {
                                     >
                                         Sair
                                     </S.RegisterButton>
-                            </S.Column>
-                            <S.Column>
-                                <S.FlexLine>
-                                    {session?.user?.username}
-                                </S.FlexLine>
-                                <S.FlexLine>
-                                    {session?.user?.coins_qty}
-                                </S.FlexLine>
                             </S.Column>
                         </>
                     )

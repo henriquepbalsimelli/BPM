@@ -9,7 +9,7 @@ export default function DefaultHeader() {
         <>
             <S.FlexContainer>
                 <S.FlexSubContainer>
-                    <User />
+                    <S.EmptyContainer/>
                     <S.ImgContainer>
                         <Logo
                             src={LOGO_IMAGE_URL}
@@ -18,7 +18,7 @@ export default function DefaultHeader() {
                             fill
                         />
                     </S.ImgContainer>
-                    <Configs />
+                    <User />
                 </S.FlexSubContainer>
                 <S.FlexSubContainer2>
                     <S.NLink href='/'>
