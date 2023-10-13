@@ -6,6 +6,7 @@ const ONE_SECOND = 1
 const TEN_SECONDES = 10 * ONE_SECOND
 const ONE_MINUTE = 60 * ONE_SECOND
 const ONE_HOUR = 60 * ONE_MINUTE
+const THREE_HOURS = 3 * ONE_HOUR
 const ONE_DAY = 24 * ONE_HOUR
 const ONE_MONTH = 30 * ONE_DAY
 const ONE_YEAR = 365 * ONE_DAY
@@ -40,7 +41,7 @@ export const tokenService = {
         return await jwt.sign(
             { roles: ['user'] },
             ACCESSTOKEN_SECRET,
-            { subject: `${userId}`, expiresIn: TEN_SECONDES }
+            { subject: `${userId}`, expiresIn: THREE_HOURS }
         );
     },
 
