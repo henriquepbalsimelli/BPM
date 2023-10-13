@@ -3,7 +3,6 @@ import { tokenService } from "@/services/authService/tokenService";
 
 export async function getSessionData(token){
     try {
-
         await tokenService.validateAccessToken(token);
         const decodedToken = await tokenService.decodeToken(token);
     

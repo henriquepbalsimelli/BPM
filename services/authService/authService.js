@@ -1,6 +1,7 @@
 import { HttpClient } from "@/components/infra/HttpClient/HttpClient"
 import { tokenService } from "./tokenService"
 import {getSessionData} from "@/pages/api/session"
+import nookies from 'nookies'
 
 
 export const authService = {
@@ -8,7 +9,8 @@ export const authService = {
         
         const response = await HttpClient(`/api/login`, {
             method: 'POST',
-            body: credentials
+            body: credentials,
+            refresh: true
         })
         .then((response) => {
             if (!response.ok) {throw new Error(response.body.message)}
@@ -50,7 +52,8 @@ export const authService = {
             method: 'GET',
             headers: {
                 'authorization': `Bearer ${token}`
-            }
+            },
+            refresh: true
         })
             .then((response) => {
                 

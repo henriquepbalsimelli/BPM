@@ -1,9 +1,9 @@
 import nookies from "nookies"
 import jwt from 'jsonwebtoken';
-import { HttpClient } from "../../components/infra/HttpClient/HttpClient";
 
 const ACCESS_TOKEN_KEY = 'accessToken'
 const ONE_SECOND = 1
+const TEN_SECONDES = 10 * ONE_SECOND
 const ONE_MINUTE = 60 * ONE_SECOND
 const ONE_HOUR = 60 * ONE_MINUTE
 const ONE_DAY = 24 * ONE_HOUR
@@ -40,7 +40,7 @@ export const tokenService = {
         return await jwt.sign(
             { roles: ['user'] },
             ACCESSTOKEN_SECRET,
-            { subject: `${userId}`, expiresIn: ONE_DAY }
+            { subject: `${userId}`, expiresIn: TEN_SECONDES }
         );
     },
 
