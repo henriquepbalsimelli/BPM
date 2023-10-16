@@ -7,7 +7,7 @@ import { authService } from '@/services/authService/authService'
 
 export default function User() {
 
-    const [user, setUser, session] = useContext(AuthContext)
+    const {session, setSession} = useContext(AuthContext)
     const [loginModalState, setLoginModalState] = useState(false)
     const [registerModalState, setRegisterModalState] = useState(false)
 
@@ -19,9 +19,24 @@ export default function User() {
                     session?.user ? (
                         <>
                             <S.Column>
-                                <S.FlexLine>
-                                    {session?.user?.username}
-                                </S.FlexLine>
+                                {
+                                    session?.user?.id ? (
+                                        <S.SLink
+                                            href={`/user/${session?.user?.id}`}
+                                        >
+                                            <S.FlexLine>
+                                                {session?.user?.username}
+                                            </S.FlexLine>
+                                        </S.SLink>
+                                    ):
+                                    (
+                                        <S.SLink>
+                                            <S.FlexLine>
+                                                {session?.user?.username}
+                                            </S.FlexLine>
+                                        </S.SLink>
+                                    )
+                                }
                                 <S.FlexLine>
                                     {session?.user?.coins_qty}
                                 </S.FlexLine>
@@ -29,8 +44,9 @@ export default function User() {
                             <S.Column>
                                 <S.RegisterButton
                                         onClick={() =>{
-                                            authService.logout()
-                                            window.location.reload()
+                                            authService.logout(session?.user?.id)
+                                            setSession(null)
+                                            // window.location.reload()
                                         }}
                                     >
                                         Sair

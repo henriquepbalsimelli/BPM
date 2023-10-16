@@ -27,11 +27,12 @@ function AuthProvider({children}){
     }, [])
 
     const value = React.useMemo(
-        () => [
+        () => ({
             user,
             setUser,
-            session
-        ],
+            session,
+            setSession
+        }),
         [
             user,
             session

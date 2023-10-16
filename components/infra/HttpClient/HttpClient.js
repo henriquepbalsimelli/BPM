@@ -24,7 +24,6 @@ export async function HttpClient(fetchUrl, fetchOptions) {
                 method: 'GET'
             })
             const newAccessToken = refreshResponse.body.access_token
-            const newRefreshToken = refreshResponse.body.refresh_token
 
             tokenService.save(newAccessToken)
 

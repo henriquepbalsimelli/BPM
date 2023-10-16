@@ -9,8 +9,7 @@ export const authService = {
         
         const response = await HttpClient(`/api/login`, {
             method: 'POST',
-            body: credentials,
-            refresh: true
+            body: credentials
         })
         .then((response) => {
             if (!response.ok) {throw new Error(response.body.message)}
@@ -65,7 +64,11 @@ export const authService = {
             })
 
     },
-    logout: async () => {
+    logout: async (id) => {
+        await HttpClient(`/api/logout`, {
+            method: 'POST',
+            body: {id}
+        })
         tokenService.delete()
     }
 

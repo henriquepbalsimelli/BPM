@@ -11,7 +11,8 @@ export async function getSessionData(token){
             user: {
                 username: user.name,
                 email: user.email,
-                coins: user.coins_qty
+                coins: user.coins_qty,
+                id: user.id
             },
             id: decodedToken.sub,
             roles: decodedToken.roles

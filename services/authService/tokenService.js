@@ -34,7 +34,11 @@ export const tokenService = {
 
     delete(ctx=null){
         globalThis?.sessionStorage?.removeItem(ACCESS_TOKEN_KEY)
+        globalThis?.localStorage?.removeItem(ACCESS_TOKEN_KEY)
         nookies.destroy(ctx, ACCESS_TOKEN_KEY)
+        globalThis?.sessionStorage?.removeItem('REFRESH_TOKEN')
+        globalThis?.localStorage?.removeItem('REFRESH_TOKEN')
+        nookies.destroy(ctx, 'REFRESH_TOKEN')
     },
 
     async generateAccessToken(userId) {

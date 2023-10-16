@@ -30,7 +30,8 @@ export default async function handler(req, res) {
     
     nookies.set(ctx, REFRESH_TOKEN, tokens.refresh_token, {
         httpOnly: true,
-        sameSite: 'lax'
+        sameSite: 'lax',
+        path: '/'
     })
 
     await UserRepository.updateRefreshToken(id, tokens.refresh_token)

@@ -1,5 +1,10 @@
-import { PrimaryButton } from '@fluentui/react'
 import styled from 'styled-components'
+import Link from '../infra/Link'
+
+
+export const SLink = styled(Link)`
+    color: white;
+`
 
 export const UserContainer = styled.div`
     width: 20%;

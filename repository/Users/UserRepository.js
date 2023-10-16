@@ -28,7 +28,7 @@ export const UserRepository = {
     updateRefreshToken: async(id, refresh_token) => {
         await db('users').update(
             {
-                refresh_token: refresh_token
+                'refresh_token': refresh_token
             }
         ).where({'id': id})
     }
