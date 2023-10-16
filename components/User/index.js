@@ -46,7 +46,6 @@ export default function User() {
                                         onClick={() =>{
                                             authService.logout(session?.user?.id)
                                             setSession(null)
-                                            // window.location.reload()
                                         }}
                                     >
                                         Sair

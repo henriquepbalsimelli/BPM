@@ -7,6 +7,9 @@ export default function UserConfig({userId}) {
     const {session} = useContext(AuthContext)
 
     useEffect(() => {
+        if (!session){
+            window.location.href = '/'
+        }
         if (session){
             if (session.user.id != userId){
                 window.location.href = '/'
