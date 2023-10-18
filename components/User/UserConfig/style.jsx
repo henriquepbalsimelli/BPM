@@ -15,9 +15,15 @@ export const Form = styled.form`
     flex-direction: column;
 `
 
-export const InputText = styled.input`
+export const InputContainer = styled.div`
+    display: flex;
+    flex-direction: column;
     width: fit-content;
     margin: 0em 0em 1em 0em;
+`
+
+export const InputText = styled.input`
+    width: fit-content;
 `
 
 export const Label = styled.label`
@@ -30,4 +36,9 @@ export const Title = styled.h1`
 export const ConfirmButtion = styled.button`
     margin: 0em 0em 1em 0em;
     width: fit-content;
+`
+
+export const ErrorSpan = styled.span`
+    color: red;
+    font-size: 0.8em;
 `
