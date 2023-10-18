@@ -33,12 +33,8 @@ export const UserRepository = {
         ).where({ 'id': id })
     },
     updateUser: async (userData) => {
-        await db('users').update(
-            {
-                'name': userData.name,
-                'email': userData.email,
-                'password': userData.password
-            }
+        return await db('users').update(
+            userData
         ).where({ 'id': userData.id }
         )
     }

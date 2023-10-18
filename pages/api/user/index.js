@@ -1,4 +1,5 @@
 import { UserRepository } from "@/repository/Users/UserRepository";
+import { UserSchema } from "@/src/schemas/user";
 import { generateHash } from "@/src/utils/tools";
 
 
@@ -6,6 +7,15 @@ const controllers = {
     async updateUser(req, res) {
         const { body } = req;
         const { email, password, name, id } = body;
+
+        const valid_schema = await UserSchema.updateUserDataSchema(body)
+        
+        if (!valid_schema) {
+            res.status(400).json({
+                message: 'Dados inválidos'
+            })
+            return
+        }
 
         const existingUser = await UserRepository.getUserByEmail(email);
 
@@ -22,23 +32,31 @@ const controllers = {
             })
             return
         }
-
-        const hashedPassword = await generateHash(password)
+        let hashedPassword
+        
+        if (password){
+          hashedPassword = await generateHash(password)
+        }
+        
         const updateData = {
             name: name,
             email: email,
             id: id
         }
-        if (password !== null && hashedPassword != existingUser.password) {
+        
+        if (password !== undefined && hashedPassword != existingUser.password) {
           updateData['password'] = hashedPassword
         }
 
-        console.log(updateData)
-
-        //const user = await UserRepository.updateUser(updateData)
+        const user = await UserRepository.updateUser(updateData)
 
         res.status(200).json({ 
-            message: 'FOI'
+            message: 'FOI',
+            updateData: {
+                name: name,
+                email: email,
+                id: id
+            }
         })
     }
   };
