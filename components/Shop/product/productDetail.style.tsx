@@ -1,6 +1,7 @@
 import { device } from "@/assets/style/GlobalStyle/GlobalStyle";
 import { PrimaryButton } from "@fluentui/react";
 import { styled } from "styled-components";
+import React from 'react'
 
 export const Main = styled.main`
     display: flex;
@@ -96,7 +97,6 @@ export const ColorSpan = styled.span`
     width: auto;
 `
 export const ColorButton = styled.button`
-    background-color:  ${props => props.backgroundColor};
     border-radius: 100%;
     width: 2em;
     height: 2em;

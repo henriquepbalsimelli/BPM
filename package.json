@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
+    "@types/node": "20.8.7",
     "babel-plugin-styled-components": "^2.1.4"
   },
   "browser": {

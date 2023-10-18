@@ -14,7 +14,7 @@ export const getServerSideProps = async (context) => {
 }
 
 
-export default function Product({ product }) {
+export default function Product( {product} ) {
     return (
         <>
             <Header/>

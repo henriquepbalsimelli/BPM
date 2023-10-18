@@ -63,7 +63,8 @@ export const ShopService = {
                 price: 100,
                 sizes: ['SM', 'M', 'L', 'XL'],
                 colors: ['#fdd938', '#c1795f', '#5883b4'],
-                description: 'Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam inxigo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean.'
+                description: 'Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam inxigo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean.',
+                quantity: 4
 
             },
             {
@@ -72,6 +73,7 @@ export const ShopService = {
                 price: 100,
                 sizes: ['SM', 'M', 'L', 'XL'],
                 colors: ['#fdd938', '#c1795f', '#5883b4'],
+                quantity: 4
 
             },
             {
@@ -80,6 +82,7 @@ export const ShopService = {
                 price: 100,
                 sizes: ['SM', 'M', 'L', 'XL'],
                 colors: ['#fdd938', '#c1795f', '#5883b4'],
+                quantity: 4
 
             },
             {
@@ -88,6 +91,7 @@ export const ShopService = {
                 price: 100,
                 sizes: ['SM', 'M', 'L', 'XL'],
                 colors: ['#fdd938', '#c1795f', '#5883b4'],
+                quantity: 4
 
             },
             {
@@ -96,6 +100,7 @@ export const ShopService = {
                 price: 100,
                 sizes: ['SM', 'M', 'L', 'XL'],
                 colors: ['#fdd938', '#c1795f', '#5883b4'],
+                quantity: 4
 
             },
             {
@@ -104,6 +109,7 @@ export const ShopService = {
                 price: 100,
                 sizes: ['SM', 'M', 'L', 'XL'],
                 colors: ['#fdd938', '#c1795f', '#5883b4'],
+                quantity: 4
 
             },
             {
@@ -112,6 +118,7 @@ export const ShopService = {
                 price: 100,
                 sizes: ['SM', 'M', 'L', 'XL'],
                 colors: ['#fdd938', '#c1795f', '#5883b4'],
+                quantity: 4
 
             },
             {
@@ -120,6 +127,7 @@ export const ShopService = {
                 price: 100,
                 sizes: ['SM', 'M', 'L', 'XL'],
                 colors: ['#fdd938', '#c1795f', '#5883b4'],
+                quantity: 4
 
             },
         ]

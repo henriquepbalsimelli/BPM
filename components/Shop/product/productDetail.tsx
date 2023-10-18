@@ -1,14 +1,22 @@
-import * as S from './style'
-import ImageBpm from '@/components/infra/Image';
+import React from 'react'
+import { CartService } from '../../../services/CartService/cartService';
+import * as S from './productDetail.style'
+import ImageBpm from '../../infra/Image';
+import {ProductInterface} from '../../../src/Interfaces/ProductInterface';
 
 
-export default function ProductDetail({ product }) {
+export default function ProductDetail(data: {product: ProductInterface }) {
+
+    const handleAddCartItem = (product: any) => {
+        CartService.addItemToCart(product)
+    }
+    
     return (
         <>
             <S.Main>
                 <S.Section>
                     <S.Container>
-                        <S.ImgContainer>
+                        <S.ImgContainer>    
                             <ImageBpm
                                 width={700}
                                 height={475}
@@ -21,15 +29,15 @@ export default function ProductDetail({ product }) {
                             />
                         </S.ImgContainer>
                         <S.ProductInfoContainer>
-                            <S.ProductName>{product.name}</S.ProductName>
+                            <S.ProductName>{data.product.name}</S.ProductName>
                             <S.ProductDesccriptionContainer>
-                                <S.Description>Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam inxigo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean.</S.Description>
+                                <S.Description>{data.product.description}</S.Description>
                             </S.ProductDesccriptionContainer>
                             <S.ConfigContainer >
                                 <S.ColorSpan>Color</S.ColorSpan>
                                 <div>
                                     {
-                                        product.colors.map((color, index) => {
+                                        data.product.colors.map((color, index) => {
                                             return (
                                                 <S.ColorButton key={index} style={{ backgroundColor: color }}></S.ColorButton>
                                             )
@@ -39,9 +47,9 @@ export default function ProductDetail({ product }) {
                             </S.ConfigContainer>
                             <S.SizeOptions >
                                 <S.SizeSpan>Size</S.SizeSpan>
-                                <S.SizeSelectOptions options={product.options}>
+                                <S.SizeSelectOptions>
                                     {
-                                        product.sizes.map((size, index) => {
+                                        data.product.sizes.map((size, index) => {
                                             return (
                                                 <S.SizeOption key={index} value={size}>{size}</S.SizeOption>
                                             )
@@ -51,15 +59,16 @@ export default function ProductDetail({ product }) {
                             </S.SizeOptions>
                             <S.QuantityContainer>
                                 <S.QuantitySpan>Quantity</S.QuantitySpan>
-                                <S.QuantitySpan >4</S.QuantitySpan>
+                                <S.QuantitySpan>{data.product.quantity}</S.QuantitySpan>
                             </S.QuantityContainer>
                             <S.CostContainer>
-                                <S.CostSpan>${product.price}</S.CostSpan>
+                                <S.CostSpan>${data.product.price}</S.CostSpan>
                                 <S.SubDivButtons>
                                     <S.BuyNowButton>Buy now</S.BuyNowButton>
                                     <S.AddToCartButton
                                         onClick={() => {
-                                            console.log('add to cart')
+                                            
+                                            handleAddCartItem(data.product)
                                         }}
                                     >
                                         Add to cart
