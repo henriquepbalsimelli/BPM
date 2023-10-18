@@ -32,8 +32,8 @@ const controllers = {
             })
             return
         }
-        let hashedPassword
         
+        let hashedPassword
         if (password){
           hashedPassword = await generateHash(password)
         }

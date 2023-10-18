@@ -1,4 +1,3 @@
-import { getProductDetail } from '@/services/shopService/shopService';
 import * as S from './style'
 import ImageBpm from '@/components/infra/Image';
 
@@ -58,7 +57,11 @@ export default function ProductDetail({ product }) {
                                 <S.CostSpan>${product.price}</S.CostSpan>
                                 <S.SubDivButtons>
                                     <S.BuyNowButton>Buy now</S.BuyNowButton>
-                                    <S.AddToCartButton>
+                                    <S.AddToCartButton
+                                        onClick={() => {
+                                            console.log('add to cart')
+                                        }}
+                                    >
                                         Add to cart
                                     </S.AddToCartButton>
                                 </S.SubDivButtons>

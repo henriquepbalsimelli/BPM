@@ -1,10 +1,10 @@
 import Head from '@/components/infra/Head'
 import Header from '@/components/infra/Header'
-import { getProducts } from '@/services/shopService/shopService'
+import { ShopService } from '@/services/shopService/shopService'
 import ProductGalery from '@/components/Shop/productGalery/productGalery'
 
 export const getServerSideProps = async () => {
-    const data = await getProducts()
+    const data = await ShopService.getProducts()
 
     const products = data.data
 
