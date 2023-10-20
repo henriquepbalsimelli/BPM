@@ -1,7 +1,6 @@
 import { device } from "@/assets/style/GlobalStyle/GlobalStyle";
-import { PrimaryButton } from "@fluentui/react";
+import { Dropdown, PrimaryButton } from "@fluentui/react";
 import { styled } from "styled-components";
-import React from 'react'
 
 export const Main = styled.main`
     display: flex;
@@ -24,7 +23,7 @@ export const ImgContainer = styled.div`
     padding: 1em;
 `
 
-export const ProductInfoContainer = styled.div`
+export const ProductInfoContainer = styled.form`
     display: flex;
     margin: 1em;
     flex-direction: column;
@@ -108,17 +107,29 @@ export const ColorButton = styled.button`
     cursor: pointer;
 `
 
+export const SelectedColorButton = styled.button`
+    border: 1px solid #384677;
+    border-radius: 100%;
+    width: 2em;
+    height: 2em;
+    margin: 0em 0.5em 0em 0.5em;
+    &:focus{
+        outline: none;
+    }
+    cursor: pointer;
+    
+`
+
 export const SizeOptions = styled.div`
     display: flex;
     margin: 1em 0em 1em 0em;
     align-items: center;
     justify-content: space-between;
 `
-export const SizeSelectOptions = styled.select`
+export const SizeSelectOptions = styled(Dropdown)`
     border-radius: 2px;
     appearance: none;
-    width: 5em;
-    border: 1px solid #dfdfdf;
+    width: 3em;
     &:focus{
         border: indigo;
         
@@ -155,7 +166,7 @@ export const SubDivButtons = styled.div`
 `
 
 export const BuyNowButton = styled(PrimaryButton)`
-    background-color: #85cb43;
+    background-color: ${props => props.disabled ? 'gray' : '#85cb43'};
     border-radius: 2px;
     border: none;
     height: 2em;
@@ -165,11 +176,12 @@ export const BuyNowButton = styled(PrimaryButton)`
 `
 
 export const AddToCartButton = styled(PrimaryButton)`
-    background-color: #33dcf3;
+    background-color: ${props => props.disabled ? 'gray' : '#33dcf3'};
     border-radius: 2px;
     border: none;
     height: 2em;
     margin: 0em 0.5em 0em 0.5em;
     color: white;
     font-weight: bold;
+
 `

@@ -1,11 +1,11 @@
-import { use, useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import * as S from './style'
 import { AuthContext } from '@/contexts/AuthContext/Auth'
 import ModalLogin from './SignInModal/index'
 import SignUpModal from './SignUpModal/index'
 import { authService } from '@/services/authService/authService'
 
-export default function User() {
+export default function User({ setCartModalState }) {
 
     const {session, setSession} = useContext(AuthContext)
     const [loginModalState, setLoginModalState] = useState(false)
@@ -40,6 +40,15 @@ export default function User() {
                                 <S.FlexLine>
                                     {session?.user?.coins_qty}
                                 </S.FlexLine>
+                            </S.Column>
+                            <S.Column>
+                                <S.CartItem
+                                    iconName="ShoppingCart"
+                                    onClick={() =>{
+                                        setCartModalState(true)
+                                        }}
+                                />
+
                             </S.Column>
                             <S.Column>
                                 <S.RegisterButton

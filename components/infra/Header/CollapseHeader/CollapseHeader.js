@@ -4,11 +4,14 @@ import * as S from './style'
 import Configs from '@/components/PageConfigs'
 import { useCollapse } from 'react-collapsed'
 import { Icon } from '@fluentui/react'
+import Cart from '../../../Cart/cart';
+import { useState } from 'react';
 
 initializeIcons()
 export default function CollapseHeader() {
     
     const { getCollapseProps, getToggleProps, isExpanded } = useCollapse()
+    const [cartModalState, setCartModalState] = useState(false)
     
     return (
         <>
@@ -30,7 +33,9 @@ export default function CollapseHeader() {
                         <S.NLink href='/videosanimations'>
                             <S.Li>Vídeos e Animações</S.Li>
                         </S.NLink>
-                        <User />
+                        <User 
+                            setCartModalState={setCartModalState}
+                        />
                         <Configs />
                     </ul>
                 </section>
@@ -44,6 +49,10 @@ export default function CollapseHeader() {
                             : <S.MenuIcon iconName='AlignJustify' />}
                 </S.MenuButton>
             </S.CollapseHeaderContainer>
+            <Cart
+                isOpen={cartModalState}
+                setCartModalState={setCartModalState}
+            />
         </>
     )
 }

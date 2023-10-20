@@ -1,6 +1,6 @@
-import  ProductDetail  from "@/components/Shop/product/productDetail"
+import  ProductDetail  from "../../../components/Shop/product/productDetail"
 import Header from "@/components/infra/Header"
-import { ShopService } from "@/services/shopService/shopService"
+import { ShopService } from "../../../services/shopService/shopService"
 
 export const getServerSideProps = async (context) => {
 

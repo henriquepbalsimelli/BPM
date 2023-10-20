@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Link from '../infra/Link'
+import { Icon } from '@fluentui/react'
 
 
 export const SLink = styled(Link)`
@@ -49,3 +50,17 @@ export const ColumnContainer = styled.div`
     margin: 0em 1em 0em 0em;
 
 `
+
+export const CartItem = styled(Icon)`
+    color: white;
+    margin: 0.5em;
+    font-size: large;
+    height: 1em;
+    &:hover {
+        color: #3b3b3b;
+        cursor: pointer;
+    };
+
+
+`
+

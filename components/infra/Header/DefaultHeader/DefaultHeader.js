@@ -1,10 +1,15 @@
 import Configs from '@/components/PageConfigs'
 import * as S from './style'
 import Logo from '../../Logo'
-import User from '@/components/User'
+import User from '../../../User'
+import Cart from '../../../Cart/cart'
+import { useState } from 'react'
 
 const LOGO_IMAGE_URL = '/images/bpm_logo.svg'
 export default function DefaultHeader() {
+
+    const [cartModalState, setCartModalState] = useState(false)
+
     return (
         <>
             <S.FlexContainer>
@@ -18,7 +23,9 @@ export default function DefaultHeader() {
                             fill
                         />
                     </S.ImgContainer>
-                    <User />
+                    <User 
+                        setCartModalState={setCartModalState}
+                    />
                 </S.FlexSubContainer>
                 <S.FlexSubContainer2>
                     <S.NLink href='/'>
@@ -38,6 +45,10 @@ export default function DefaultHeader() {
                     </S.NLink>
                 </S.FlexSubContainer2>
             </S.FlexContainer>
+            <Cart
+                isOpen={cartModalState}
+                setCartModalState={setCartModalState}
+            />
         </>
     )
 }

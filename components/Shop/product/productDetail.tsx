@@ -1,22 +1,28 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import { CartService } from '../../../services/CartService/cartService';
 import * as S from './productDetail.style'
 import ImageBpm from '../../infra/Image';
-import {ProductInterface} from '../../../src/Interfaces/ProductInterface';
+import { ProductInterface } from '../../../src/Interfaces/ProductInterface';
+import { Dropdown } from '@fluentui/react';
 
 
-export default function ProductDetail(data: {product: ProductInterface }) {
+export default function ProductDetail(data: { product: ProductInterface }) {
+    const [selectedProduct, setSelectedProduct] = useState<ProductInterface>(data.product)
+
+    const selectedColor = useMemo(() => {
+        return selectedProduct.color
+    }, [selectedProduct])
 
     const handleAddCartItem = (product: any) => {
-        CartService.addItemToCart(product)
+        new CartService().addItemToCart(product)
     }
-    
+
     return (
         <>
             <S.Main>
                 <S.Section>
                     <S.Container>
-                        <S.ImgContainer>    
+                        <S.ImgContainer>
                             <ImageBpm
                                 width={700}
                                 height={475}
@@ -29,46 +35,97 @@ export default function ProductDetail(data: {product: ProductInterface }) {
                             />
                         </S.ImgContainer>
                         <S.ProductInfoContainer>
-                            <S.ProductName>{data.product.name}</S.ProductName>
+                            <S.ProductName>{selectedProduct.name}</S.ProductName>
                             <S.ProductDesccriptionContainer>
-                                <S.Description>{data.product.description}</S.Description>
+                                <S.Description>{selectedProduct.description}</S.Description>
                             </S.ProductDesccriptionContainer>
                             <S.ConfigContainer >
                                 <S.ColorSpan>Color</S.ColorSpan>
                                 <div>
                                     {
-                                        data.product.colors.map((color, index) => {
-                                            return (
-                                                <S.ColorButton key={index} style={{ backgroundColor: color }}></S.ColorButton>
-                                            )
+                                        selectedProduct.colors.map((color, index) => {
+                                            if (color == selectedProduct.color) {
+                                                return (
+                                                    <S.SelectedColorButton
+                                                        type='button'
+                                                        key={index}
+                                                        style={{ backgroundColor: color }}
+                                                        onClick={(e) => {
+                                                            const newColor = e.currentTarget.style.backgroundColor
+                                                            if (newColor != selectedColor) {
+                                                                setSelectedProduct(
+                                                                    {
+                                                                        ...selectedProduct,
+                                                                        color: color
+                                                                    }
+                                                                )
+                                                            }
+                                                        }}
+
+
+                                                    />
+                                                )
+                                            }
+                                            else {
+                                                return (
+                                                    <S.ColorButton
+                                                        type='button'
+                                                        key={index}
+                                                        style={{ backgroundColor: color }}
+                                                        onClick={(e) => {
+                                                            const newColor = e.currentTarget.style.backgroundColor
+                                                            if (newColor != selectedColor) {
+                                                                setSelectedProduct(
+                                                                    {
+                                                                        ...selectedProduct,
+                                                                        color: color
+                                                                    }
+                                                                )
+                                                            }
+                                                        }}
+                                                    />
+                                                )
+                                            }
                                         })
                                     }
                                 </div>
                             </S.ConfigContainer>
                             <S.SizeOptions >
                                 <S.SizeSpan>Size</S.SizeSpan>
-                                <S.SizeSelectOptions>
-                                    {
-                                        data.product.sizes.map((size, index) => {
-                                            return (
-                                                <S.SizeOption key={index} value={size}>{size}</S.SizeOption>
+                                <S.SizeSelectOptions
+                                    options={selectedProduct.sizes.map((size, index) => {
+                                        return (
+                                            { key: index, text: size }
+                                        )
+                                    })}
+                                    onChange={(e, value) => {
+                                        const newSize = value?.text
+                                        if (newSize){
+                                            setSelectedProduct(
+                                                {
+                                                    ...selectedProduct,
+                                                    size: value?.text
+                                                }
                                             )
-                                        })
-                                    }
-                                </S.SizeSelectOptions>
+                                        }
+                                    }}
+                                />
                             </S.SizeOptions>
-                            <S.QuantityContainer>
-                                <S.QuantitySpan>Quantity</S.QuantitySpan>
-                                <S.QuantitySpan>{data.product.quantity}</S.QuantitySpan>
-                            </S.QuantityContainer>
                             <S.CostContainer>
-                                <S.CostSpan>${data.product.price}</S.CostSpan>
+                                <S.CostSpan>${selectedProduct.price}</S.CostSpan>
                                 <S.SubDivButtons>
-                                    <S.BuyNowButton>Buy now</S.BuyNowButton>
-                                    <S.AddToCartButton
+                                    <S.BuyNowButton
+                                        disabled={!selectedProduct.size || !selectedProduct.color}
+                                        type='button'
                                         onClick={() => {
-                                            
-                                            handleAddCartItem(data.product)
+                                            const cart = new CartService().getCart()
+                                        }}
+                                    >Buy now</S.BuyNowButton>
+                                    <S.AddToCartButton
+                                        type='button'
+                                        disabled={!selectedProduct.size || !selectedProduct.color}
+                                        onClick={() => {
+                                            handleAddCartItem(selectedProduct)
                                         }}
                                     >
                                         Add to cart

@@ -10,4 +10,6 @@ export type ProductInterface = {
     sizes: string[]
     colors: string[]
     description: string
+    color: string
+    size: string
 }

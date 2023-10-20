@@ -10,6 +10,15 @@ export default async function handler(req, res) {
     const cookies = nookies.get(ctx)
     const refresh_token = cookies[REFRESH_TOKEN]
 
+    if (!refresh_token) {
+        return res.status(401).json({
+            error: {
+                status: 401,
+                message: 'Invalid refresh token, please login again.',
+            }
+        });
+    }
+
     const { sub } = await tokenService.validateRefreshToken(refresh_token)
     const id = sub
 
