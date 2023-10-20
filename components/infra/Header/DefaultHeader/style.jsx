@@ -21,7 +21,11 @@ export const FlexSubContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 90vw;
+    width: 100vw;
+`
+
+export const EmptyContainer = styled.div`
+    width: 20%;
 `
 
 export const FlexSubContainer2 = styled.div`
@@ -36,4 +40,5 @@ export const ImgContainer = styled.div`
     width: 20%;
     position: relative;
     height: 10vh;
+    
 `

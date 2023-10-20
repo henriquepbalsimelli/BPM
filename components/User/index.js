@@ -1,13 +1,13 @@
-import { use, useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import * as S from './style'
 import { AuthContext } from '@/contexts/AuthContext/Auth'
 import ModalLogin from './SignInModal/index'
 import SignUpModal from './SignUpModal/index'
 import { authService } from '@/services/authService/authService'
 
-export default function User() {
+export default function User({ setCartModalState }) {
 
-    const [user, setUser, session] = useContext(AuthContext)
+    const {session, setSession} = useContext(AuthContext)
     const [loginModalState, setLoginModalState] = useState(false)
     const [registerModalState, setRegisterModalState] = useState(false)
 
@@ -19,22 +19,46 @@ export default function User() {
                     session?.user ? (
                         <>
                             <S.Column>
+                                {
+                                    session?.user?.id ? (
+                                        <S.SLink
+                                            href={`/user/${session?.user?.id}`}
+                                        >
+                                            <S.FlexLine>
+                                                {session?.user?.username}
+                                            </S.FlexLine>
+                                        </S.SLink>
+                                    ):
+                                    (
+                                        <S.SLink>
+                                            <S.FlexLine>
+                                                {session?.user?.username}
+                                            </S.FlexLine>
+                                        </S.SLink>
+                                    )
+                                }
+                                <S.FlexLine>
+                                    {session?.user?.coins_qty}
+                                </S.FlexLine>
+                            </S.Column>
+                            <S.Column>
+                                <S.CartItem
+                                    iconName="ShoppingCart"
+                                    onClick={() =>{
+                                        setCartModalState(true)
+                                        }}
+                                />
+
+                            </S.Column>
+                            <S.Column>
                                 <S.RegisterButton
                                         onClick={() =>{
-                                            authService.logout()
-                                            window.location.reload()
+                                            authService.logout(session?.user?.id)
+                                            setSession(null)
                                         }}
                                     >
                                         Sair
                                     </S.RegisterButton>
-                            </S.Column>
-                            <S.Column>
-                                <S.FlexLine>
-                                    {session?.user?.username}
-                                </S.FlexLine>
-                                <S.FlexLine>
-                                    {session?.user?.coins_qty}
-                                </S.FlexLine>
                             </S.Column>
                         </>
                     )

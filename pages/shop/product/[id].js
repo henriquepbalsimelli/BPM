@@ -1,10 +1,10 @@
-import  ProductDetail  from "@/components/Shop/product/productDetail"
+import  ProductDetail  from "../../../components/Shop/product/productDetail"
 import Header from "@/components/infra/Header"
-import { getProductDetail } from "@/services/shopService/shopService"
+import { ShopService } from "../../../services/shopService/shopService"
 
 export const getServerSideProps = async (context) => {
 
-    const data = await getProductDetail(context.params.id)
+    const data = await ShopService.getProductDetail(context.params.id)
     const product = data.product
     return {
         props: {
@@ -14,7 +14,7 @@ export const getServerSideProps = async (context) => {
 }
 
 
-export default function Product({ product }) {
+export default function Product( {product} ) {
     return (
         <>
             <Header/>

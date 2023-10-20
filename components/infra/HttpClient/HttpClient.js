@@ -1,3 +1,5 @@
+import { tokenService } from "@/services/authService/tokenService"
+
 export async function HttpClient(fetchUrl, fetchOptions) {
     return fetch(fetchUrl, {
         ...fetchOptions,
@@ -7,13 +9,32 @@ export async function HttpClient(fetchUrl, fetchOptions) {
         },
         body: fetchOptions.body ? JSON.stringify(fetchOptions.body) : null
     })
-        .then(async(response) => {
-            if (response.ok) {
-                return {
-                    body: await response.json(),
-                    ok: response.ok
-                }
+        .then(async (response) => {
+            return {
+                body: await response.json(),
+                ok: response.ok,
+                status: response.status,
+                statusText: response.statusText
             }
-            throw new Error('Login Inválido')
+        })
+        .then(async (response) => {
+            if (!fetchOptions.refresh) return response
+            if (response.status !== 401) return response
+            const refreshResponse = await HttpClient(`/api/refreshToken`, {
+                method: 'GET'
+            })
+            const newAccessToken = refreshResponse.body.access_token
+
+            tokenService.save(newAccessToken)
+
+            const retryResponse = await HttpClient(fetchUrl, {
+                ...fetchOptions,
+                refresh: false,
+                headers: {
+                    'authorization': `Bearer ${newAccessToken}`
+                }
+            })
+
+            return retryResponse
         })
 }

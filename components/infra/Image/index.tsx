@@ -3,7 +3,7 @@ import Image from "next/image"
 
 
 
-export default function ImageBpm({ width, height, src, alt, priority, sizes, style }) {
+export default function ImageBpm({ width, height, src, alt, priority, sizes, style }: any) {
     return (
         <>
             <Image

@@ -1,11 +1,12 @@
 import nookies from "nookies"
 import jwt from 'jsonwebtoken';
-import { HttpClient } from "../../components/infra/HttpClient/HttpClient";
 
 const ACCESS_TOKEN_KEY = 'accessToken'
 const ONE_SECOND = 1
+const TEN_SECONDES = 10 * ONE_SECOND
 const ONE_MINUTE = 60 * ONE_SECOND
 const ONE_HOUR = 60 * ONE_MINUTE
+const THREE_HOURS = 3 * ONE_HOUR
 const ONE_DAY = 24 * ONE_HOUR
 const ONE_MONTH = 30 * ONE_DAY
 const ONE_YEAR = 365 * ONE_DAY
@@ -33,14 +34,18 @@ export const tokenService = {
 
     delete(ctx=null){
         globalThis?.sessionStorage?.removeItem(ACCESS_TOKEN_KEY)
+        globalThis?.localStorage?.removeItem(ACCESS_TOKEN_KEY)
         nookies.destroy(ctx, ACCESS_TOKEN_KEY)
+        globalThis?.sessionStorage?.removeItem('REFRESH_TOKEN')
+        globalThis?.localStorage?.removeItem('REFRESH_TOKEN')
+        nookies.destroy(ctx, 'REFRESH_TOKEN')
     },
 
     async generateAccessToken(userId) {
         return await jwt.sign(
             { roles: ['user'] },
             ACCESSTOKEN_SECRET,
-            { subject: `${userId}`, expiresIn: ONE_DAY }
+            { subject: `${userId}`, expiresIn: THREE_HOURS }
         );
     },
 

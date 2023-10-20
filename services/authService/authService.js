@@ -1,6 +1,7 @@
 import { HttpClient } from "@/components/infra/HttpClient/HttpClient"
 import { tokenService } from "./tokenService"
 import {getSessionData} from "@/pages/api/session"
+import nookies from 'nookies'
 
 
 export const authService = {
@@ -50,7 +51,8 @@ export const authService = {
             method: 'GET',
             headers: {
                 'authorization': `Bearer ${token}`
-            }
+            },
+            refresh: true
         })
             .then((response) => {
                 
@@ -62,7 +64,11 @@ export const authService = {
             })
 
     },
-    logout: async () => {
+    logout: async (id) => {
+        await HttpClient(`/api/logout`, {
+            method: 'POST',
+            body: {id}
+        })
         tokenService.delete()
     }
 
