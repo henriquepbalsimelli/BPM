@@ -77,6 +77,8 @@ export default function Cart({ setCartModalState, isOpen }: any) {
                                     key={item.id}
                                     item={item}
                                     setTotal={setTotal}
+                                    cart={cart}
+                                    setCart={setCart}
                                 />
                             )
                         })

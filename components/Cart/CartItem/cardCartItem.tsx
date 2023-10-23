@@ -1,10 +1,11 @@
 import * as S from './cardCartItem.style'
 import { CartItem } from '../../../src/Interfaces/cartItem'
-import { CartService } from '@/services/CartService/cartService'
+import { CartService } from '../../../services/CartService/cartService'
 import { Dispatch, SetStateAction, useState } from 'react'
+import React from 'react'
 
 
-export function CardCartItem({ item, key, setTotal }: { item: CartItem, key: number, setTotal: Dispatch<SetStateAction<number>> }){
+export function CardCartItem({ item, key, setTotal, cart, setCart }: { item: CartItem, key: number, setTotal: Dispatch<SetStateAction<number>>, cart: CartItem[], setCart: Dispatch<SetStateAction<CartItem[]>> }){
     
     const [quantity, setQuantity] = useState(item.quantity)
     
@@ -26,10 +27,15 @@ export function CardCartItem({ item, key, setTotal }: { item: CartItem, key: num
                             <S.MinusIcon iconName="CalculatorSubtract" 
                                 onClick={() => {
                                     const cartService = new CartService()
-                                    cartService.decreaseQuantity(item)
                                     if (quantity > 1){
+                                        cartService.decreaseQuantity(item)
                                         setQuantity(quantity - 1)
                                         setTotal(cartService.getTotal())
+                                    }
+                                    if (quantity === 1){
+                                        cartService.removeItem(item)
+                                        setTotal(cartService.getTotal())
+                                        setCart(cartService.getCart())
                                     }
                                 }}
                             />
