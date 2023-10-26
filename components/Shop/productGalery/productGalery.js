@@ -27,9 +27,8 @@ export default function ProductGalery({ products }) {
                                     </S.ImgDiv>
                                 </a>
                                 <div >
-                                    <h3>{product.category}</h3>
-                                    <Link href={`/shop/product/${product.id}`}>
-                                        <h2 >{product.title}</h2>
+                                    <Link href={`/shop/product/${product.productCode}`}>
+                                        <h3 >{product.productDescription}</h3>
                                     </Link>
                                     <p >${product.price}</p>
                                 </div>
