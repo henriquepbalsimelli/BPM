@@ -7,7 +7,13 @@ export const getServerSideProps = async () => {
     const shopService = new ShopService()
     const data = await shopService.getProducts()
 
-    const products = data
+    const valuesA = []
+
+    data.forEach((value) => {
+        valuesA.push(value)
+    })
+
+    const products = valuesA
 
     return {
         props: {
@@ -19,14 +25,15 @@ export const getServerSideProps = async () => {
 
 
 export default function Shop({ products }) {
+
     return (
         <>
+
             <Head
                 title="The BPM - Loja"
             />
             <Header />
-            <ProductGalery products={products}/>
-            
+            <ProductGalery products={products} />
         </>
     )
 }

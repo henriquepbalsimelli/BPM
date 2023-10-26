@@ -1,8 +1,16 @@
-import Link from '@/components/infra/Link'
 import * as S from './style'
 import ImageBpm from '@/components/infra/Image'
+import { useRouter } from 'next/router'
+import  Link  from '../../../components/infra/Link'
 
 export default function ProductGalery({ products }) {
+
+    const router = useRouter()
+    const handleSelectProduct = (product) => {
+        router.push(`/shop/product/${product.familyCode}`)
+    }
+    
+
     return (
         <S.Section >
             <S.Container >
@@ -11,7 +19,12 @@ export default function ProductGalery({ products }) {
                         return (
                             <div key={product.id}>
                                 <a >
-                                    <S.ImgDiv>
+                                    <S.ImgDiv
+                                        onClick={() => {
+                                            handleSelectProduct(product)
+
+                                        }}
+                                    >
                                         <ImageBpm
                                             width={700}
                                             height={475}
@@ -27,10 +40,10 @@ export default function ProductGalery({ products }) {
                                     </S.ImgDiv>
                                 </a>
                                 <div >
-                                    <Link href={`/shop/product/${product.productCode}`}>
-                                        <h3 >{product.productDescription}</h3>
+                                    <Link href={`/shop/product/${product.familyCode}`}>
+                                        <h3 >{product.familyDescription}</h3>
                                     </Link>
-                                    <p >${product.price}</p>
+                                    <p>${product.price}</p>
                                 </div>
                             </div>
                         )

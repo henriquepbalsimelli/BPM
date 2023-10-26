@@ -1,5 +1,5 @@
 import { ProductStockIntegrationInterface } from '@/src/Interfaces/integration/ProductStockIntegrationInterface'
-import { ProductIntegrationDataInterface } from '../../../src/Interfaces/integration/ProductIntegrationDataInterface'
+import { ProductIntegrationDataInterface, ProductIntegrationInterface, ProductIntegrationCharacteristicsInterface } from '../../../src/Interfaces/integration/ProductIntegrationDataInterface'
 import { ProductDetailInterface, ProductCharacteristicsInterface } from '../../../src/Interfaces/integration/ProductDetailInterface'
 import { OmieClient } from '../../../components/infra/OmieClient/index'
 
@@ -28,6 +28,10 @@ export class ProductIntegrationService {
             content
         )
 
+        if (!products) {
+            throw new Error('Erro ao buscar estoque dos produtos')
+        }
+
         const data: ProductStockIntegrationInterface = {
             nPagina: products.nPagina,
             nTotPaginas: products.nTotPaginas,
@@ -50,7 +54,8 @@ export class ProductIntegrationService {
                     "pagina": 1,
                     "registros_por_pagina": 50,
                     "apenas_importado_api": "N",
-                    "filtrar_apenas_omiepdv": "N"
+                    "filtrar_apenas_omiepdv": "N",
+                    "exibir_caracteristicas": "S"
                 }
             ]
         }
@@ -60,7 +65,35 @@ export class ProductIntegrationService {
             content
         )
 
-        return products
+
+        const data: ProductIntegrationDataInterface = {
+            page: products.pagina,
+            total_per_page: products.total_de_paginas,
+            records: products.registros,
+            total_records: products.total_de_registros,
+            product_service_registered: products.produto_servico_cadastro?.map((product: any) => {
+                const mappedProduct: ProductIntegrationInterface = {
+                    product_code: product.codigo_produto,
+                    code: product.codigo,
+                    family_code: product.codigo_familia,
+                    detailed_description: product.descr_detalhada,
+                    description: product.description,
+                    family_description: product.descricao_familia,
+                    unit_value: product.valor_unitario,
+                    product_code_integration: product.codigo_produto_integracao,
+                    characteristics: product.caracteristicas?.map((caracteristica: any) => {
+                        const characteristic: ProductIntegrationCharacteristicsInterface = {
+                            content: caracteristica.cConteudo,
+                            name: caracteristica.cNomeCaract
+                        }
+                        return characteristic
+                    })
+                }
+            
+                return mappedProduct 
+            })
+        }
+        return data
     }
 
 
@@ -82,6 +115,10 @@ export class ProductIntegrationService {
             content
         )
 
+        if (!productDetail) {
+            throw new Error('Product not found')
+        }
+
         const data: ProductDetailInterface = {
             detailed_description: productDetail.descr_detalhada,
             product_code: productDetail.codigo_produto,
@@ -92,7 +129,7 @@ export class ProductIntegrationService {
             images: productDetail.imagens,
             family_desciption: productDetail.descricao_familia,
             unit_value: productDetail.valor_unitario,
-            characteristics: productDetail.caracteristicas.map((caracteristica: any)=>{
+            characteristics: productDetail.caracteristicas.map((caracteristica: any) => {
                 const characteristic: ProductCharacteristicsInterface = {
                     content: caracteristica.cConteudo,
                     show_in_invoice: caracteristica.cExibirItemNF,
@@ -102,8 +139,32 @@ export class ProductIntegrationService {
                 }
                 return characteristic
             })
-        } 
+        }
 
         return data
+    }
+
+    async getProductsByFamily(familyCode: string): Promise<any[]> {
+        const content = {
+            "app_key": OMIE_APP_KEY,
+            "app_secret": OMIE_APP_SECRET,
+            "call": "ListarProdutos",
+            "param": [
+                {
+                    "pagina": 1,
+                    "registros_por_pagina": 50,
+                    "apenas_importado_api": "N",
+                    "filtrar_apenas_omiepdv": "N",
+                    "exibir_caracteristicas": "S",
+                    "filtrar_apenas_familia": familyCode
+                  }
+            ]
+        }
+        const productsByFamily = await OmieClient(
+            'https://app.omie.com.br/api/v1/geral/produtos/',
+            content
+        )
+        
+        return productsByFamily
     }
 }

@@ -1,18 +1,24 @@
 export interface ProductIntegrationDataInterface {
-    pagina: number
-    total_de_paginas: number
-    registros: number
-    total_de_registros: number
-    produto_servico_cadastro: ProductIntegrationInterface[]
+    page: number
+    total_per_page: number
+    records: number
+    total_records: number
+    product_service_registered: ProductIntegrationInterface[]
 }
 
 export interface ProductIntegrationInterface {
-    codigo_produto: number
-    codigo: string
-    codigo_familia: number
-    descr_detalhada: string
-    descricao: string
-    descricao_familia: string
-    valor_unitario: number
-    codigo_produto_integracao: string
+    product_code: number
+    code: string
+    family_code: number
+    detailed_description: string
+    description: string
+    family_description: string
+    unit_value: number
+    product_code_integration: string
+    characteristics: ProductIntegrationCharacteristicsInterface[]
+}
+
+export interface ProductIntegrationCharacteristicsInterface {
+    name: string
+    content: string
 }

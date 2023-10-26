@@ -16,6 +16,14 @@ export class ShopService {
         return data
 
     }
+
+    async getProductByFamily(family) {
+        const productsService = new ProductsService()
+
+        const data = await productsService.getProductByFamily(family)
+        
+        return data
+    }
 }
 
 

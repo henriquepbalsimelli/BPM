@@ -20,4 +20,14 @@ export const ImgDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    &:hover{
+        cursor: pointer;
+    }
+`
+
+export const FamilyTitle = styled.p`
+    
+    &:hover{
+        cursor: pointer;
+    }
 `

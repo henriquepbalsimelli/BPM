@@ -9,4 +9,5 @@ export interface VariationsInterface {
     price: number
     color: string | null
     size: string | null
+    product_code: number
 }

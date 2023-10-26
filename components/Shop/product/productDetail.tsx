@@ -1,17 +1,16 @@
-import React, { useMemo, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { CartService } from '../../../services/CartService/cartService';
 import * as S from './productDetail.style'
-import ImageBpm from '../../infra/Image';
-import { ProductInterface } from '../../../src/Interfaces/ProductInterface';
-import { Dropdown } from '@fluentui/react';
+import ImageBpm from '../../infra/Image'
+import {ProductDetailInterface} from '../../../src/Interfaces/integration/ProductDetailInterface'
 
 
-export default function ProductDetail(data: { product: ProductInterface }) {
-    const [selectedProduct, setSelectedProduct] = useState<ProductInterface>(data.product)
 
-    const selectedColor = useMemo(() => {
-        return selectedProduct.color
-    }, [selectedProduct])
+export default function ProductDetail({product}: any) {
+
+    // const selectedColor = useMemo(() => {
+    //     return selectedProduct.color
+    // }, [selectedProduct])
 
     const handleAddCartItem = (product: any) => {
         new CartService().addItemToCart(product)
@@ -19,7 +18,7 @@ export default function ProductDetail(data: { product: ProductInterface }) {
 
     return (
         <>
-            <S.Main>
+            {/* <S.Main>
                 <S.Section>
                     <S.Container>
                         <S.ImgContainer>
@@ -35,15 +34,15 @@ export default function ProductDetail(data: { product: ProductInterface }) {
                             />
                         </S.ImgContainer>
                         <S.ProductInfoContainer>
-                            <S.ProductName>{selectedProduct.name}</S.ProductName>
+                            <S.ProductName>{selectedProduct.description}</S.ProductName>
                             <S.ProductDesccriptionContainer>
-                                <S.Description>{selectedProduct.description}</S.Description>
+                                <S.Description>{selectedProduct.detailed_description}</S.Description>
                             </S.ProductDesccriptionContainer>
                             <S.ConfigContainer >
                                 <S.ColorSpan>Color</S.ColorSpan>
                                 <div>
                                     {
-                                        selectedProduct.colors.map((color, index) => {
+                                        selectedProduct?.colors?.map((color, index) => {
                                             if (color == selectedProduct.color) {
                                                 return (
                                                     <S.SelectedColorButton
@@ -93,11 +92,7 @@ export default function ProductDetail(data: { product: ProductInterface }) {
                             <S.SizeOptions >
                                 <S.SizeSpan>Size</S.SizeSpan>
                                 <S.SizeSelectOptions
-                                    options={selectedProduct.sizes.map((size, index) => {
-                                        return (
-                                            { key: index, text: size }
-                                        )
-                                    })}
+                                    options={selectedProduct?.sizes}
                                     onChange={(e, value) => {
                                         const newSize = value?.text
                                         if (newSize){
@@ -135,7 +130,8 @@ export default function ProductDetail(data: { product: ProductInterface }) {
                         </S.ProductInfoContainer>
                     </S.Container>
                 </S.Section>
-            </S.Main>
+            </S.Main> */}
+
         </>
     )
 }
