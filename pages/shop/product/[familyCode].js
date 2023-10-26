@@ -1,6 +1,6 @@
 import  ProductDetail  from "../../../components/Shop/product/productDetail"
 import Header from "@/components/infra/Header"
-import { ShopService } from "../../../services/ShopService/ShopService"
+import { ShopService } from "../../../services/ShopService"
 
 export const getServerSideProps = async (context) => {
     const shopService = new ShopService()
