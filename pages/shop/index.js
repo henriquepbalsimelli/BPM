@@ -1,6 +1,6 @@
 import Head from '@/components/infra/Head'
 import Header from '@/components/infra/Header'
-import { ShopService } from '@/services/ShopService/ShopService'
+import { ShopService } from '../../services/ShopService'
 import ProductGalery from '../../components/Shop/productGalery/productGalery'
 
 export const getServerSideProps = async () => {
