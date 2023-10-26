@@ -5,8 +5,7 @@ import { ShopService } from "../../../services/ShopService/ShopService"
 export const getServerSideProps = async (context) => {
     const shopService = new ShopService()
     const data = await shopService.getProductByFamily(context.params.familyCode)
-    console.log(data)
-    
+
     return {
         props: {
             data
