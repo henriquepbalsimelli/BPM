@@ -97,7 +97,7 @@ export default function Cart({ setCartModalState, isOpen }: any) {
                     >Limpar carrinho</S.ClearCartButton>
                     <S.FinishCartButton
                         onClick={() => {
-                            console.log('finalizar compra')
+                            
                         }}
                     >Finalizar compra</S.FinishCartButton>
                 </S.ButtonsDiv>
