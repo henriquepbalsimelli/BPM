@@ -144,7 +144,7 @@ export class ProductIntegrationService {
         return data
     }
 
-    async getProductsByFamily(familyCode: string): Promise<any[]> {
+    async getProductsByFamily(familyCode: string): Promise<ProductIntegrationDataInterface> {
         const content = {
             "app_key": OMIE_APP_KEY,
             "app_secret": OMIE_APP_SECRET,
@@ -164,7 +164,39 @@ export class ProductIntegrationService {
             'https://app.omie.com.br/api/v1/geral/produtos/',
             content
         )
-        
-        return productsByFamily
+
+        if (!productsByFamily) {
+            throw new Error('Não foi possível obter a lista de produtos por família')
+        }
+
+        const data: ProductIntegrationDataInterface = {
+            page: productsByFamily.pagina,
+            total_per_page: productsByFamily.total_de_paginas,
+            records: productsByFamily.registros,
+            total_records: productsByFamily.total_de_registros,
+            product_service_registered: productsByFamily.produto_servico_cadastro?.map((product: any) => {
+                const mappedProduct: ProductIntegrationInterface = {
+                    product_code: product.codigo_produto,
+                    code: product.codigo,
+                    family_code: product.codigo_familia,
+                    detailed_description: product.descr_detalhada,
+                    description: product.description,
+                    family_description: product.descricao_familia,
+                    unit_value: product.valor_unitario,
+                    product_code_integration: product.codigo_produto_integracao,
+                    characteristics: product.caracteristicas?.map((caracteristica: any) => {
+                        const characteristic: ProductIntegrationCharacteristicsInterface = {
+                            content: caracteristica.cConteudo,
+                            name: caracteristica.cNomeCaract
+                        }
+                        return characteristic
+                    })
+                }
+            
+                return mappedProduct 
+            })
+        }
+
+        return data
     }
 }
