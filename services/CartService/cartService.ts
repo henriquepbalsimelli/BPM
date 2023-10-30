@@ -27,6 +27,7 @@ export class CartService {
         })
 
         if (!exists){
+            item.quantity = 1
             cart.push(item)
         }
 

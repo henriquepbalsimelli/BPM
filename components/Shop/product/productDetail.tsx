@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { CartService } from '../../../services/CartService/cartService';
 import * as S from './productDetail.style'
 import ImageBpm from '../../infra/Image'
-import {ProductDetailInterface} from '../../../src/Interfaces/integration/ProductDetailInterface'
-import { IDropdownOption } from '@fluentui/react';
+import { ISelectableOption } from '@fluentui/react';
 
 
 
@@ -13,36 +12,64 @@ export default function ProductDetail(data: any) {
         new CartService().addItemToCart(product)
     }
 
-    const json = JSON.parse(data.product)
+    const parsedData = JSON.parse(data.product)
 
-    const [selectedProduct, setSelectedProduct] = useState<any>(json)
-    const [colors, setColors] = useState<any>([])
-    const [sizes, setSizes] = useState<IDropdownOption[]>([])
+    const [selectedProduct, setSelectedProduct] = useState<any>(parsedData)
+    const [sizes, setSizes] = useState<ISelectableOption[]>([])
+    const [fixedColors, setFixedColors] = useState<any>([])
+
+    const findSizes = useCallback((color: any) => {
+        const availableSizes = selectedProduct?.variations?.filter((variation: any) => {
+            return variation.color == color
+        }).map((variation: any) => {
+            return {
+                key: variation.product_code,
+                text: variation.size,
+                disabled: false
+            }
+        }).filter((size: any, index: number, self: any) => {
+            return index === self.findIndex((t: any) => {
+                return t.text === size.text
+            })
+        })
+        console.log('availableSizes', availableSizes)
+
+
+        return availableSizes
+    }, [selectedProduct?.variations])
+
 
     useEffect(() => {
-        const colors = selectedProduct?.variations?.map((variation: any) => {
+
+        const fixedColors = selectedProduct?.variations?.map((variation: any) => {
             return variation.color
         }).filter((color: any, index: number, self: any) =>
             index === self.findIndex((t: any) => (
                 t === color
             ))
         )
-        setColors(colors)
+        setFixedColors(fixedColors)
 
-        const sizes = selectedProduct?.variations?.map((variation: any, index: number) => {
+        let sizes = selectedProduct?.variations?.map((variation: any) => {
             return {
-                key: index,
-                text: variation.size
+                key: variation.product_code,
+                text: variation.size,
+
             }
         }).filter((size: any, index: number, self: any) =>
             index === self.findIndex((t: any) => (
                 t.text === size.text
             ))
         )
-        
-        setSizes(sizes)
-    }, [selectedProduct])
 
+        if (selectedProduct?.color){
+            sizes = findSizes(selectedProduct?.color)
+        }
+            
+        setSizes(sizes)
+    }, [findSizes, selectedProduct])
+
+    
     return (
         <>
             <S.Main>
@@ -69,7 +96,7 @@ export default function ProductDetail(data: any) {
                                 <S.ColorSpan>Color</S.ColorSpan>
                                 <div>
                                     {
-                                        colors?.map((color: any, index: any) => {
+                                        fixedColors?.map((color: any, index: any) => {
                                             if (color == selectedProduct.color) {
                                                 return (
                                                     <S.SelectedColorButton
@@ -77,15 +104,11 @@ export default function ProductDetail(data: any) {
                                                         key={index}
                                                         style={{ backgroundColor: color }}
                                                         onClick={(e) => {
-                                                            const newColor = e.currentTarget.style.backgroundColor
-                                                            if (newColor != selectedProduct.color) {
-                                                                setSelectedProduct(
-                                                                    {
-                                                                        ...selectedProduct,
-                                                                        color: color
-                                                                    }
-                                                                )
-                                                            }
+                                                            setSelectedProduct({
+                                                                ...selectedProduct,
+                                                                color: null,
+                                                                size: null
+                                                            })
                                                         }}
 
 
@@ -104,7 +127,9 @@ export default function ProductDetail(data: any) {
                                                                 setSelectedProduct(
                                                                     {
                                                                         ...selectedProduct,
-                                                                        color: color
+                                                                        color: color,
+                                                                        size: null,
+                                                                        product_code: null
                                                                     }
                                                                 )
                                                             }
@@ -120,13 +145,15 @@ export default function ProductDetail(data: any) {
                                 <S.SizeSpan>Size</S.SizeSpan>
                                 <S.SizeSelectOptions
                                     options={sizes}
+                                    selectedKey={selectedProduct?.selectedSize?.key ? selectedProduct?.selectedSize?.key : null}
                                     onChange={(e, value) => {
                                         const newSize = value?.text
                                         if (newSize){
                                             setSelectedProduct(
                                                 {
                                                     ...selectedProduct,
-                                                    size: value?.text
+                                                    size: value?.text,
+                                                    selectedSize: value
                                                 }
                                             )
                                         }
@@ -158,7 +185,6 @@ export default function ProductDetail(data: any) {
                     </S.Container>
                 </S.Section>
             </S.Main>
-
         </>
     )
 }

@@ -4,7 +4,6 @@ import styled from "styled-components"
 
 export const FlexContainer = styled.div`
     display: flex;
-    width: 100vw;
     background-color: #272727;
     justify-content: center;
     height: fit-content;
@@ -24,7 +23,7 @@ export const FlexSubContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100vw;
+    width: 100%;
 `
 
 export const EmptyContainer = styled.div`
@@ -35,7 +34,7 @@ export const FlexSubContainer2 = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 100vw;
+    width: 100%;
     margin: 1em 0em 1em 0em;
 `
 
