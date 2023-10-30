@@ -1,7 +1,7 @@
 export interface FamilyProductInterface {
-    familyCode: number
-    familyDescription: string
-    price: number
+    familyCode: string | number
+    familyDescription: string | null
+    price: number | null
     variations: VariationsInterface[]
 }
 

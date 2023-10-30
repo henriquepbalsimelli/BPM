@@ -81,16 +81,25 @@ export class ProductsService {
         }
     }
 
-    async getProductByFamily(familyCode: string):Promise<(Map<string, FamilyProductInterface>)>{
+    async getProductByFamily(familyCode: string): Promise<FamilyProductInterface>{
         try{
             const productIntegrationService = new ProductIntegrationService()
 
             const productsByFamily: any = await productIntegrationService.getProductsByFamily(familyCode)
 
-            const productFamilyDict = new Map<string, FamilyProductInterface>()
+            const productFamilyDict: FamilyProductInterface = {
+                familyCode: familyCode,
+                familyDescription: null,
+                price: null,
+                variations: []
+            }
 
             productsByFamily.product_service_registered?.map((product: any) => {
-                const existingFamily = productFamilyDict.get(product.family_description)
+
+                if (!productFamilyDict.familyDescription) {
+                    productFamilyDict['familyDescription'] = product.familyDescription
+                    productFamilyDict['price'] = product.unit_value
+                }
 
                 const colorObject: any = product.characteristics?.find((characteristic: ProductIntegrationCharacteristicsInterface) => {
                     return characteristic.name === 'Cores'
@@ -100,30 +109,14 @@ export class ProductsService {
                     return characteristic.name === 'Tamanho'
                 })
 
-                if (existingFamily) {
-                    const variation: VariationsInterface = {
-                        price: product.unit_value,
-                        color: colorObject?.content,
-                        size: sizeObject?.content,
-                        product_code: product.product_code
-                    } 
-                    existingFamily.variations.push(variation)
-                }
-                else{
-                    const variation: VariationsInterface = {
-                        price: product.unit_value,
-                        color: colorObject?.content,
-                        size: sizeObject?.content,
-                        product_code: product.product_code
-                    } 
-                    const familyData: FamilyProductInterface  = {
-                        familyCode: product.family_code,
-                        familyDescription: product.family_description,
-                        price: product.unit_value,
-                        variations: [variation]
-                    }
-                    productFamilyDict.set(product.family_description, familyData)
-                }
+                const variation: VariationsInterface = {
+                    price: product.unit_value,
+                    color: colorObject?.content,
+                    size: sizeObject?.content,
+                    product_code: product.product_code
+                } 
+                productFamilyDict.variations.push(variation)
+                
             })
 
             return productFamilyDict

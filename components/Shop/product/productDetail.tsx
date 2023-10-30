@@ -3,22 +3,49 @@ import { CartService } from '../../../services/CartService/cartService';
 import * as S from './productDetail.style'
 import ImageBpm from '../../infra/Image'
 import {ProductDetailInterface} from '../../../src/Interfaces/integration/ProductDetailInterface'
+import { IDropdownOption } from '@fluentui/react';
 
 
 
-export default function ProductDetail({product}: any) {
-
-    // const selectedColor = useMemo(() => {
-    //     return selectedProduct.color
-    // }, [selectedProduct])
+export default function ProductDetail(data: any) {
 
     const handleAddCartItem = (product: any) => {
         new CartService().addItemToCart(product)
     }
 
+    const json = JSON.parse(data.product)
+
+    const [selectedProduct, setSelectedProduct] = useState<any>(json)
+    const [colors, setColors] = useState<any>([])
+    const [sizes, setSizes] = useState<IDropdownOption[]>([])
+
+    useEffect(() => {
+        const colors = selectedProduct?.variations?.map((variation: any) => {
+            return variation.color
+        }).filter((color: any, index: number, self: any) =>
+            index === self.findIndex((t: any) => (
+                t === color
+            ))
+        )
+        setColors(colors)
+
+        const sizes = selectedProduct?.variations?.map((variation: any, index: number) => {
+            return {
+                key: index,
+                text: variation.size
+            }
+        }).filter((size: any, index: number, self: any) =>
+            index === self.findIndex((t: any) => (
+                t.text === size.text
+            ))
+        )
+        
+        setSizes(sizes)
+    }, [selectedProduct])
+
     return (
         <>
-            {/* <S.Main>
+            <S.Main>
                 <S.Section>
                     <S.Container>
                         <S.ImgContainer>
@@ -42,7 +69,7 @@ export default function ProductDetail({product}: any) {
                                 <S.ColorSpan>Color</S.ColorSpan>
                                 <div>
                                     {
-                                        selectedProduct?.colors?.map((color, index) => {
+                                        colors?.map((color: any, index: any) => {
                                             if (color == selectedProduct.color) {
                                                 return (
                                                     <S.SelectedColorButton
@@ -51,7 +78,7 @@ export default function ProductDetail({product}: any) {
                                                         style={{ backgroundColor: color }}
                                                         onClick={(e) => {
                                                             const newColor = e.currentTarget.style.backgroundColor
-                                                            if (newColor != selectedColor) {
+                                                            if (newColor != selectedProduct.color) {
                                                                 setSelectedProduct(
                                                                     {
                                                                         ...selectedProduct,
@@ -73,7 +100,7 @@ export default function ProductDetail({product}: any) {
                                                         style={{ backgroundColor: color }}
                                                         onClick={(e) => {
                                                             const newColor = e.currentTarget.style.backgroundColor
-                                                            if (newColor != selectedColor) {
+                                                            if (newColor != selectedProduct.color) {
                                                                 setSelectedProduct(
                                                                     {
                                                                         ...selectedProduct,
@@ -92,7 +119,7 @@ export default function ProductDetail({product}: any) {
                             <S.SizeOptions >
                                 <S.SizeSpan>Size</S.SizeSpan>
                                 <S.SizeSelectOptions
-                                    options={selectedProduct?.sizes}
+                                    options={sizes}
                                     onChange={(e, value) => {
                                         const newSize = value?.text
                                         if (newSize){
@@ -130,7 +157,7 @@ export default function ProductDetail({product}: any) {
                         </S.ProductInfoContainer>
                     </S.Container>
                 </S.Section>
-            </S.Main> */}
+            </S.Main>
 
         </>
     )

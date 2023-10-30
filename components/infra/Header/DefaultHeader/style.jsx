@@ -10,6 +10,9 @@ export const FlexContainer = styled.div`
     height: fit-content;
     flex-direction: column;
     align-items: center;
+    border-radius: 0em 0em 1em 1em;
+    box-shadow: 0 3px 10px 3px #0000008e;
+
 `
 
 export const NLink = styled(Link)`

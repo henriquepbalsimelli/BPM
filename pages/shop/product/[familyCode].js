@@ -4,7 +4,10 @@ import { ShopService } from "../../../services/ShopService"
 
 export const getServerSideProps = async (context) => {
     const shopService = new ShopService()
-    const data = await shopService.getProductByFamily(context.params.familyCode)
+    
+    let data = await shopService.getProductByFamily(context.params.familyCode)
+
+    data = JSON.stringify(data)
 
     return {
         props: {
