@@ -32,7 +32,6 @@ export default function ProductDetail(data: any) {
                 return t.text === size.text
             })
         })
-        console.log('availableSizes', availableSizes)
 
 
         return availableSizes
