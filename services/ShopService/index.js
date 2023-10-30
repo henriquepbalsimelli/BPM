@@ -1,4 +1,5 @@
 import { ProductsService } from '../Products/productsService'
+import { HttpClient } from '../../components/infra/HttpClient/HttpClient'
 
 
 export class ShopService {   
@@ -23,6 +24,19 @@ export class ShopService {
         const data = await productsService.getProductByFamily(family)
         
         return data
+    }
+
+    async getFamiliesApi(){
+        const res = await HttpClient(
+            '/api/integration/products',
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }    
+        )
+        return res
     }
 }
 

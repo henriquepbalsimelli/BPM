@@ -1,16 +1,27 @@
+import { FamilyProductInterface } from "@/src/Interfaces/FamilyProductInterface"
 import { ProductsService } from "../../../../services/Products/productsService"
 
 export default async function handler(req: any, res: any) {
+    try {
 
-    const productService = new ProductsService()
+        const productService = new ProductsService()
 
-    const products = await productService.getProductByFamily('4806871524')
+        const products = await productService.getProducts()
 
-    const valuesA: any = []
-  
-    res.status(200).json({
-        name: 'John Doe',
-        products: products
-    })
-  
+        const values: any = []
+
+        products.forEach((value: FamilyProductInterface) => {
+            values.push(value)
+        })
+
+        res.status(200).json({
+            products: values
+        })
+
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({
+            message: 'internal server error'
+        })
+    }
 }
