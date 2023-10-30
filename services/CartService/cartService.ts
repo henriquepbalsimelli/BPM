@@ -5,7 +5,6 @@ export class CartService {
     getCart() {
         let cart: CartItem[] = []
         if (typeof window !== 'undefined') {
-            // Perform localStorage action
             const item = localStorage.getItem('key')
             cart = JSON.parse(localStorage?.getItem('cart') || '[]')
         }
