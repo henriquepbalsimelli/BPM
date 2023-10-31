@@ -38,6 +38,22 @@ export class ShopService {
         )
         return res
     }
+
+    async getFamilyDetails(familyCode){
+        const res = await HttpClient(
+            '/api/integration/familyDetail',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: {
+                    familyCode: familyCode
+                }
+            }    
+        )
+        return res
+    }
 }
 
 

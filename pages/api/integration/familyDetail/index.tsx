@@ -1,4 +1,3 @@
-import { FamilyProductInterface } from "@/src/Interfaces/FamilyProductInterface"
 import { ProductsService } from "../../../../services/Products/productsService"
 
 export default async function handler(req: any, res: any) {
@@ -6,16 +5,12 @@ export default async function handler(req: any, res: any) {
 
         const productService = new ProductsService()
 
-        const products = await productService.getProducts()
+        const body = req.body
 
-        const values: any = []
-
-        products.forEach((value: FamilyProductInterface) => {
-            values.push(value)
-        })
+        const details = await productService.getProductByFamily(body.familyCode)
 
         res.status(200).json({
-            products: values
+            products: details
         })
 
     } catch (err) {

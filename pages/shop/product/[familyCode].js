@@ -3,12 +3,7 @@ import Header from "@/components/infra/Header"
 import { ShopService } from "../../../services/ShopService"
 
 export const getServerSideProps = async (context) => {
-    const shopService = new ShopService()
-    
-    let data = await shopService.getProductByFamily(context.params.familyCode)
-
-    data = JSON.stringify(data)
-
+    const data = context.params.familyCode
     return {
         props: {
             data
@@ -21,7 +16,7 @@ export default function Product({ data } = null) {
     return (
         <>
             <Header/>
-            <ProductDetail product={data}/>
+            <ProductDetail familyCode={data}/>
         </>
     )
 }

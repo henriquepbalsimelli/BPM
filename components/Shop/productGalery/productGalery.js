@@ -37,7 +37,7 @@ export default function ProductGalery() {
             setFamilies(families)
             setLoading(false)
         }).catch((err) => {
-            console.log(err)
+            console.error(err)
             setError(err.message)
         })
     }, [])

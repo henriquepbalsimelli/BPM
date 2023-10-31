@@ -180,7 +180,7 @@ export class ProductIntegrationService {
                     code: product.codigo,
                     family_code: product.codigo_familia,
                     detailed_description: product.descr_detalhada,
-                    description: product.description,
+                    description: product.descricao,
                     family_description: product.descricao_familia,
                     unit_value: product.valor_unitario,
                     product_code_integration: product.codigo_produto_integracao,
