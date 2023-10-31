@@ -111,7 +111,7 @@ export default function ProductDetail(data: any) {
                                     <S.Description>{selectedProduct?.detailed_description}</S.Description>
                                 </S.ProductDesccriptionContainer>
                                 <S.ConfigContainer >
-                                    <S.ColorSpan>Color</S.ColorSpan>
+                                    <S.ColorSpan>Cor</S.ColorSpan>
                                     <div>
                                         {
                                             fixedColors?.map((color: any, index: any) => {
@@ -160,7 +160,7 @@ export default function ProductDetail(data: any) {
                                     </div>
                                 </S.ConfigContainer>
                                 <S.SizeOptions >
-                                    <S.SizeSpan>Size</S.SizeSpan>
+                                    <S.SizeSpan>Tamanho</S.SizeSpan>
                                     <S.SizeSelectOptions
                                         options={sizes}
                                         selectedKey={selectedProduct?.selectedSize?.key ? selectedProduct?.selectedSize?.key : null}
@@ -180,6 +180,7 @@ export default function ProductDetail(data: any) {
                                 </S.SizeOptions>
                                 <S.CostContainer>
                                     <S.CostSpan>${selectedProduct?.price}</S.CostSpan>
+                                </S.CostContainer>
                                     <S.SubDivButtons>
                                         <S.BuyNowButton
                                             disabled={!selectedProduct?.size || !selectedProduct?.color}
@@ -198,7 +199,6 @@ export default function ProductDetail(data: any) {
                                             Add to cart
                                         </S.AddToCartButton>
                                     </S.SubDivButtons>
-                                </S.CostContainer>
                             </S.ProductInfoContainer>
                         </S.Container>
                     </S.Section>

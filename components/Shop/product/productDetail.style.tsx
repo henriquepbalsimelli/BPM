@@ -153,8 +153,8 @@ export const QuantitySpan = styled.span`
 `
 export const CostContainer = styled.div`
     display: flex;
-    justify-content: space-between;
-    margin: 1em 0em 1em 0em;
+    justify-content: flex-end;
+    margin: 0em 1em 1em 0em;
 `
 export const CostSpan = styled.span`
 
@@ -163,6 +163,7 @@ export const CostSpan = styled.span`
 export const SubDivButtons = styled.div`
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 `
 
 export const BuyNowButton = styled(PrimaryButton)`
