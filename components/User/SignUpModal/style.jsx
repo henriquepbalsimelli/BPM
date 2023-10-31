@@ -33,7 +33,7 @@ export const Form = styled.form`
 `
 
 export const Input = styled.input`
-    margin: 1em;
+    margin: 2em 1em 0em 1em;
 `
 
 export const Button = styled.button`
@@ -44,4 +44,10 @@ export const Button = styled.button`
     color: #fff;
     border-radius: 4px;
     height: 2em;
+`
+
+export const ErrorSpan = styled.p`
+    color: red;
+    margin: 0em 0em 0em 1em;
+
 `

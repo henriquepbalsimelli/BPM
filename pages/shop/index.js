@@ -11,7 +11,7 @@ export default function Shop() {
                 title="The BPM - Loja"
             />
             <Header />
-            <ProductGalery  />
+            <ProductGalery/>
         </>
     )
 }
