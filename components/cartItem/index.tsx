@@ -1,6 +1,6 @@
 import * as S from './cardCartItem.style'
-import { ICartItem } from '../../../src/Interfaces/cartItem'
-import { CartService } from '../../../services/cartService/ui/cartService'
+import { ICartItem } from '../../src/Interfaces/cartItem'
+import { CartService } from '../../services/cartService/ui/cartService'
 import { Dispatch, SetStateAction, useState } from 'react'
 import React from 'react'
 
