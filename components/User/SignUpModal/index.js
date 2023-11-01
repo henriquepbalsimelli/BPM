@@ -1,7 +1,7 @@
 import { Modal } from '@fluentui/react'
 import * as S from './style'
 import { useEffect, useState } from 'react'
-import { authService } from '@/services/authService/authService'
+import { authService } from '../../../services/authService/ui/authService'
 import { validateCPF } from '../../../src/tools/tools'
 
 export default function SignUpModal({ open, setOpen }) {
@@ -58,7 +58,7 @@ export default function SignUpModal({ open, setOpen }) {
                             })
                     }}
                 >
-                    <S.Input placeholder="Nome Completo *"
+                    <S.Input placeholder="Nome completo *"
                         required
                         value={values.name}
                         onChange={(e) => setValues({ ...values, name: e.target.value })}

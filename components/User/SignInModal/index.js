@@ -2,7 +2,7 @@ import { Modal } from '@fluentui/react'
 import * as S from './style'	
 import { useState } from 'react'
 import { router } from 'next/router'
-import { authService } from '@/services/authService/authService'
+import { authService } from '../../../services/authService/ui/authService'
 
 export default function ModalLogin({ open, setOpen }) {
     

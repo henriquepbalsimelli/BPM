@@ -1,17 +1,17 @@
-import { ProductsService } from '../Products/productsService'
+import { ApiProductsService } from '../Products/api/apiProductsService'
 import { HttpClient } from '../../components/infra/HttpClient/HttpClient'
 
 
 export class ShopService {   
     async getProducts() {
-        const productsService = new ProductsService()
+        const productsService = new ApiProductsService()
         const data = await productsService.getProducts()
 
         return data
     }
 
     async getProductDetail(productCode) {
-        const productsService = new ProductsService()
+        const productsService = new ApiProductsService()
 
         const data = await productsService.getProductDetail(productCode)
         return data
@@ -19,7 +19,7 @@ export class ShopService {
     }
 
     async getProductByFamily(family) {
-        const productsService = new ProductsService()
+        const productsService = new ApiProductsService()
 
         const data = await productsService.getProductByFamily(family)
         

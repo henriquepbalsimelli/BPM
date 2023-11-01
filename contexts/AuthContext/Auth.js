@@ -1,4 +1,4 @@
-import { authService } from '@/services/authService/authService';
+import { authService } from '../../services/authService/ui/authService'
 import * as React from 'react' 
 
 export const AuthContext = React.createContext();

@@ -1,11 +1,11 @@
 import { ProductIntegrationInterface, ProductIntegrationCharacteristicsInterface } from "@/src/Interfaces/integration/ProductIntegrationDataInterface"
-import { ProductIntegrationService } from "./integration"
+import { ProductIntegrationService } from "../integration/integrationProductsService"
 import { ProductStock } from "@/src/Interfaces/integration/ProductStockIntegrationInterface"
-import { ProductDetailInterface } from '../../src/Interfaces/integration/ProductDetailInterface'
-import { FamilyProductInterface, VariationsInterface } from '../../src/Interfaces/FamilyProductInterface'
+import { ProductDetailInterface } from '../../../src/Interfaces/integration/ProductDetailInterface'
+import { FamilyProductInterface, VariationsInterface } from '../../../src/Interfaces/FamilyProductInterface'
 
 
-export class ProductsService {
+export class ApiProductsService {
     async getProducts(): Promise<(Map<string, FamilyProductInterface>)>  {
         try{
             const productIntegrationService = new ProductIntegrationService()

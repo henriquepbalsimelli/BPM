@@ -1,4 +1,4 @@
-import { authService } from "@/services/authService/authService"
+import { authService } from "../../services/authService/ui/authService"
 import { useEffect, useState } from "react"
 import { useRouter } from 'next/router'
 

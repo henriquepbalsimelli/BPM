@@ -1,7 +1,6 @@
 import { HttpClient } from "@/components/infra/HttpClient/HttpClient"
-import { tokenService } from "./tokenService"
+import { tokenService } from "../tokenService"
 import {getSessionData} from "@/pages/api/session"
-import nookies from 'nookies'
 
 
 export const authService = {

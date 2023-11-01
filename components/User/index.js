@@ -3,7 +3,7 @@ import * as S from './style'
 import { AuthContext } from '@/contexts/AuthContext/Auth'
 import ModalLogin from './SignInModal/index'
 import SignUpModal from './SignUpModal/index'
-import { authService } from '@/services/authService/authService'
+import { authService } from '../../services/authService/ui/authService'
 
 export default function User({ setCartModalState }) {
 

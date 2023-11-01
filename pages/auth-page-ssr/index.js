@@ -1,4 +1,4 @@
-import { authService } from "@/services/authService/authService"
+import { authService } from "../../services/authService/ui/authService"
 
 export async function getServerSideProps(context) {
     const session = await authService.getSession(context)

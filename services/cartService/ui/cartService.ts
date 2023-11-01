@@ -1,4 +1,4 @@
-import { CartItem } from '../../src/Interfaces/cartItem';
+import { CartItem } from '../../../src/Interfaces/cartItem';
 
 
 export class CartService {

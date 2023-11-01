@@ -1,9 +1,9 @@
-import { ProductsService } from "../../../../services/Products/productsService"
+import { ApiProductsService } from "../../../../services/Products/api/apiProductsService"
 
 export default async function handler(req: any, res: any) {
     try {
 
-        const productService = new ProductsService()
+        const productService = new ApiProductsService()
 
         const body = req.body
 
