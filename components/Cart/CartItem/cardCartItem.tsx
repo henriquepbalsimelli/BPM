@@ -1,11 +1,11 @@
 import * as S from './cardCartItem.style'
-import { CartItem } from '../../../src/Interfaces/cartItem'
+import { ICartItem } from '../../../src/Interfaces/cartItem'
 import { CartService } from '../../../services/cartService/ui/cartService'
 import { Dispatch, SetStateAction, useState } from 'react'
 import React from 'react'
 
 
-export function CardCartItem({ item, key, setTotal, cart, setCart }: { item: CartItem, key: number, setTotal: Dispatch<SetStateAction<number>>, cart: CartItem[], setCart: Dispatch<SetStateAction<CartItem[]>> }){
+export function CardCartItem({ item, key, setTotal, cart, setCart }: { item: ICartItem, key: number, setTotal: Dispatch<SetStateAction<number>>, cart: ICartItem[], setCart: Dispatch<SetStateAction<ICartItem[]>> }){
     
     const [quantity, setQuantity] = useState(item.quantity)
     
