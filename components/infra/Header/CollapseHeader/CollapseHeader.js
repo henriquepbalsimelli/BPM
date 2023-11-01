@@ -3,7 +3,6 @@ import User from '@/components/User'
 import * as S from './style'
 import Configs from '@/components/PageConfigs'
 import { useCollapse } from 'react-collapsed'
-import { Icon } from '@fluentui/react'
 import Cart from '../../../Cart/cart';
 import { useState } from 'react';
 

@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import React from 'react'
 
 
-export function CardCartItem({ item, key, setTotal, cart, setCart }: { item: ICartItem, key: number, setTotal: Dispatch<SetStateAction<number>>, cart: ICartItem[], setCart: Dispatch<SetStateAction<ICartItem[]>> }){
+export default function CardCartItem({ item, key, setTotal, cart, setCart }: { item: ICartItem, key: number, setTotal: Dispatch<SetStateAction<number>>, cart: ICartItem[], setCart: Dispatch<SetStateAction<ICartItem[]>> }){
     
     const [quantity, setQuantity] = useState(item.quantity)
     
