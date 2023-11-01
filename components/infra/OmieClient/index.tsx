@@ -9,7 +9,7 @@ export async function OmieClient(url: string, content: Dict){
           headers:
             { 'Content-Type': 'application/json ' }
         }).then(res => {
-          return res.data
+          return res
         }).catch(err => {
           console.error(err)
           return err

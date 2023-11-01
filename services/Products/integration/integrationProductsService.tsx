@@ -23,10 +23,12 @@ export class ProductIntegrationService {
             ]
         }
 
-        const products = await OmieClient(
+        const res = await OmieClient(
             'https://app.omie.com.br/api/v1/estoque/consulta/',
             content
         )
+
+        const products = res.data
 
         if (!products) {
             throw new Error('Erro ao buscar estoque dos produtos')
@@ -60,11 +62,12 @@ export class ProductIntegrationService {
             ]
         }
 
-        const products = await OmieClient(
+        const res = await OmieClient(
             'https://app.omie.com.br/api/v1/geral/produtos/',
             content
         )
 
+        const products = res.data
 
         const data: ProductIntegrationDataInterface = {
             page: products.pagina,
@@ -110,10 +113,12 @@ export class ProductIntegrationService {
                 }
             ]
         }
-        const productDetail = await OmieClient(
+        const res = await OmieClient(
             'https://app.omie.com.br/api/v1/geral/produtos/',
             content
         )
+
+        const productDetail = res.data
 
         if (!productDetail) {
             throw new Error('Product not found')
@@ -160,10 +165,12 @@ export class ProductIntegrationService {
                   }
             ]
         }
-        const productsByFamily = await OmieClient(
+        const res = await OmieClient(
             'https://app.omie.com.br/api/v1/geral/produtos/',
             content
         )
+
+        const productsByFamily = res.data
 
         if (!productsByFamily) {
             throw new Error('Não foi possível obter a lista de produtos por família')

@@ -1,9 +1,5 @@
-import { tokenService } from '@/services/authService/tokenService'
 import db from '../../../src/lib/database'
-import { generateHash } from '../../../src/utils/tools'
-import { UserRepository } from '@/repository/Users/UserRepository'
 import { UserSchema } from '../../../src/schemas/user'
-import { OmieClient } from '../../../components/infra/OmieClient/index'
 import { ApiUserService } from '../../../services/user/api/apiUserService'
 
 export default async function handler(req, res) {

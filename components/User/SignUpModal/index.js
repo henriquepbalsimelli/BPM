@@ -117,7 +117,6 @@ export default function SignUpModal({ open, setOpen }) {
                             loading ?
                                 <S.SSpinner /> :
                                 'Cadastrar'
-                        
                     }</S.Button>
                 </S.Form>
             </S.ModalContainer>

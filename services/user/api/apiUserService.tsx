@@ -28,18 +28,17 @@ export class ApiUserService {
 
             const integrationUserService = new IntegrationUserService()
             const omieUser = await integrationUserService.createOmieUser(id[0], data)
-
-            if (omieUser.response.data.faultcode == FaultCode.INVALID_EMAIL){
-                const message = omieUser.response.data.faultstring
-                throw new Error(`INTEGRATION_ERROR: O endereço de email '${data.email}' deve ter @ e um domínio válido`)
-            }
-            if (omieUser.response.data.faultcode == FaultCode.DOCUMENT_NUMBER_ALREADY_IN_USE){
-                throw new Error(`INTEGRATION_ERROR: Erro ao criar usuário: CPF já cadastrado`)
-            }
-
-            if (omieUser.response.status != 200){
+            
+            if (omieUser?.status != 200){
+                if (omieUser.response.data.faultcode == FaultCode.INVALID_EMAIL){
+                    throw new Error(`INTEGRATION_ERROR: O endereço de email '${data.email}' deve ter @ e um domínio válido`)
+                }
+                if (omieUser.response.data.faultcode == FaultCode.DOCUMENT_NUMBER_ALREADY_IN_USE){
+                    throw new Error(`INTEGRATION_ERROR: Erro ao criar usuário: CPF já cadastrado`)
+                }
                 throw new Error(`INTEGRATION_ERROR: Erro ao criar usuário`)
             }
+            trx.commit()
 
             const accessToken = await tokenService.generateAccessToken(id[0])
             const refreshToken = await tokenService.generateRefreshToken(id[0])
