@@ -8,7 +8,7 @@ import {
 
 } from '@fluentui/react';
 import { CartService } from "../../services/cartService/ui/cartService";
-import { CardCartItem } from "./cartItem/cardCartItem";
+import { CardCartItem } from './cartItem/cardCartItem'
 import { CartItem } from "../../src/Interfaces/cartItem";
 
 export default function Cart({ setCartModalState, isOpen }: any) {
