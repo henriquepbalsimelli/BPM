@@ -3,7 +3,7 @@ import { CartService } from '../../../services/cartService/ui/cartService';
 import * as S from './productDetail.style'
 import ImageBpm from '../../infra/Image'
 import { ISelectableOption } from '@fluentui/react';
-import { ShopService } from '../../../services/shopService'
+import { ShopService } from '@/services/shopService'
 
 export default function ProductDetail(data: any) {
 

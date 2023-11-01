@@ -9,7 +9,7 @@ import {
 } from '@fluentui/react';
 import { CartService } from "../../services/cartService/ui/cartService";
 import { CardCartItem } from './cartItem/cardCartItem'
-import { CartItem } from "../../src/Interfaces/cartItem";
+import { ICartItem } from "../../src/Interfaces/cartItem";
 
 export default function Cart({ setCartModalState, isOpen }: any) {
 
@@ -21,7 +21,7 @@ export default function Cart({ setCartModalState, isOpen }: any) {
         return new CartService()
     }, [])
 
-    const [cart, setCart] = useState<CartItem[]>([])
+    const [cart, setCart] = useState<ICartItem[]>([])
 
     useEffect(() => {
         setCart(cartService.getCart())
@@ -71,7 +71,7 @@ export default function Cart({ setCartModalState, isOpen }: any) {
                 </S.CartHeader>
                 <S.ModalContainer>
                     {
-                        cart.map((item: CartItem) => {
+                        cart.map((item: ICartItem) => {
                             return (
                                 <CardCartItem
                                     key={item.id}

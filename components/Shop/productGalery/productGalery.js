@@ -2,7 +2,7 @@ import * as S from './style'
 import ImageBpm from '@/components/infra/Image'
 import { useRouter } from 'next/router'
 import Link from '../../../components/infra/Link'
-import { ShopService } from '../../../services/ShopService'
+import { ShopService } from '@/services/ShopService'
 import { useEffect, useState } from 'react'
 
 export default function ProductGalery() {

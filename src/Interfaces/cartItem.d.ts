@@ -1,6 +1,6 @@
 
 
-export interface CartItem {
+export interface ICartItem {
     id: number
     name: string
     price: number
