@@ -7,7 +7,7 @@ import {
     IDragOptions,
 
 } from '@fluentui/react';
-import CardCartItem from "./cartItem/cardCartItem"
+import CardCartItem from "./cartItem"
 import { CartService } from "../../services/cartService/ui/cartService";
 import { ICartItem } from "../../src/Interfaces/cartItem"
 
