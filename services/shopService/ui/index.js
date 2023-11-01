@@ -1,5 +1,5 @@
-import { ApiProductsService } from '../Products/api/apiProductsService'
-import { HttpClient } from '../../components/infra/HttpClient/HttpClient'
+import { ApiProductsService } from '../../Products/api/apiProductsService'
+import { HttpClient } from '../../../components/infra/HttpClient/HttpClient'
 
 
 export class ShopService {   
