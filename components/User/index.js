@@ -55,6 +55,7 @@ export default function User({ setCartModalState }) {
                                         onClick={() =>{
                                             authService.logout(session?.user?.id)
                                             setSession(null)
+                                            localStorage.clear()
                                         }}
                                     >
                                         Sair

@@ -1,11 +1,12 @@
+import { Spinner } from "@fluentui/react";
+
 const { styled } = require("styled-components");
 
 
 export const ModalContainer = styled.div`
     display: flex;
-    width: 20;
     flex-direction: column;
-
+    width: 30em;
 `
 
 export const Header = styled.header`
@@ -18,8 +19,12 @@ export const ExitButton = styled.button`
     position: absolute;
     top: 0;
     right: 0;
-    border: none;
+    border: none 1px;
     cursor: pointer;
+    background-color: #000;
+    font-weight: bold;
+    color: white;
+    margin: 0.3em;
 `
 
 export const Title = styled.h1`
@@ -48,6 +53,9 @@ export const Button = styled.button`
 
 export const ErrorSpan = styled.p`
     color: red;
-    margin: 0em 0em 0em 1em;
+    margin: 0em 1em 0em 1em;
+`
+
+export const SSpinner = styled(Spinner)`
 
 `

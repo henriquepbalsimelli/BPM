@@ -10,7 +10,8 @@ export default function SignUpModal({ open, setOpen }) {
         name: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        general: ''
     })
 
     const [values, setValues] = useState({
@@ -19,6 +20,8 @@ export default function SignUpModal({ open, setOpen }) {
         password: '',
         confirmPassword: ''
     })
+
+    const [loading, setLoading] = useState(false)
 
     useEffect(()=>{
         if(values.password !== values.confirmPassword && values.confirmPassword !== ''){
@@ -41,6 +44,8 @@ export default function SignUpModal({ open, setOpen }) {
                 </S.Header>
                 <S.Form
                     onSubmit={(e) => {
+                        setLoading(true)
+                        setErrors({ ...errors, general: '' })
                         e.preventDefault()
                         authService.signUp({
                             email: values.email,
@@ -51,13 +56,16 @@ export default function SignUpModal({ open, setOpen }) {
 
                         })
                             .then(() => {
+                                setLoading(false)
                                 window.location.reload()
                             })
                             .catch((error) => {
-                                alert(error.message)
+                                setLoading(false)
+                                setErrors({ ...errors, general: error.message })
                             })
-                    }}
-                >
+                        }}
+                        >
+                    <S.ErrorSpan>{errors.general ? errors.general : ''}</S.ErrorSpan>
                     <S.Input placeholder="Nome completo *"
                         required
                         value={values.name}
@@ -105,7 +113,12 @@ export default function SignUpModal({ open, setOpen }) {
                     <S.ErrorSpan>{errors.confirmPassword ? errors.confirmPassword : ''}</S.ErrorSpan>
                     <S.Button
                         type="submit"
-                    >Cadastrar</S.Button>
+                    >{
+                            loading ?
+                                <S.SSpinner /> :
+                                'Cadastrar'
+                        
+                    }</S.Button>
                 </S.Form>
             </S.ModalContainer>
         </Modal>

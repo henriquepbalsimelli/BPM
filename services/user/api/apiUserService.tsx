@@ -4,7 +4,7 @@ import { tokenService } from '../../../services/authService/tokenService'
 import { Knex } from 'knex'
 import { IntegrationUserService } from '../integration/integrationUserService'
 import { CreateUserInterface } from '../../../src/Interfaces/CreateUserInterface'
-
+import { FaultCode } from '../../../src/enums/integration/faultCodeEnum'
 
 export class ApiUserService {
     async createUser(data: CreateUserInterface, trx: Knex.Transaction<any, any[]>) {
@@ -28,10 +28,17 @@ export class ApiUserService {
 
             const integrationUserService = new IntegrationUserService()
             const omieUser = await integrationUserService.createOmieUser(id[0], data)
-            console.log('OMIEUSER', omieUser.response.status)
+
+            if (omieUser.response.data.faultcode == FaultCode.INVALID_EMAIL){
+                const message = omieUser.response.data.faultstring
+                throw new Error(`INTEGRATION_ERROR: O endereço de email '${data.email}' deve ter @ e um domínio válido`)
+            }
+            if (omieUser.response.data.faultcode == FaultCode.DOCUMENT_NUMBER_ALREADY_IN_USE){
+                throw new Error(`INTEGRATION_ERROR: Erro ao criar usuário: CPF já cadastrado`)
+            }
 
             if (omieUser.response.status != 200){
-                throw new Error('Erro ao criar usuário no Omie')
+                throw new Error(`INTEGRATION_ERROR: Erro ao criar usuário`)
             }
 
             const accessToken = await tokenService.generateAccessToken(id[0])

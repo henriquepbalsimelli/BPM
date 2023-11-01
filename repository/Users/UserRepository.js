@@ -2,11 +2,16 @@ import db from '../../src/lib/database'
 
 export const UserRepository = {
     getUserByEmail: async (email) => {
-        const user = await db.select()
-            .from('users')
-            .where('email', email)
-            .first()
-        return user
+        try {
+            const user = await db.select()
+                .from('users')
+                .where('email', email)
+                .first()
+            return user
+        } catch (error) {
+            console.log(error)
+            throw new Error('Erro ao buscar usuário por email')
+        }
     },
     getUserById: async (id) => {
         const user = await db.select()
@@ -26,13 +31,13 @@ export const UserRepository = {
         return user
     },
     updateRefreshToken: async (id, refresh_token) => {
-        try{
+        try {
             await db('users').update(
                 {
                     'refresh_token': refresh_token
                 }
             ).where({ 'id': id })
-        }catch(error){
+        } catch (error) {
             console.log(error)
             throw new Error('Erro ao atualizar refresh token')
         }
