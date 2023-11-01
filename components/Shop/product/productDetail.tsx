@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { CartService } from '../../../services/cartService/ui/cartService';
+import { CartService } from '../../../services/cartService/ui/cartService'
 import * as S from './productDetail.style'
 import ImageBpm from '../../infra/Image'
-import { ISelectableOption } from '@fluentui/react';
-import { ShopService } from '@/services/shopService'
+import { ISelectableOption } from '@fluentui/react'
+import { ShopService } from '../../../services/shopService/index'
 
 export default function ProductDetail(data: any) {
 
