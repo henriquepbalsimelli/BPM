@@ -1,7 +1,7 @@
 import { AuthContext } from "@/contexts/AuthContext/Auth"
 import { useContext, useEffect, useState } from "react"
 import * as S from './style'
-import { UserService } from "@/services/User/userService"
+import { UserService } from "../../../services/user/ui/userService"
 
 
 export default function UserConfig({ userId }) {

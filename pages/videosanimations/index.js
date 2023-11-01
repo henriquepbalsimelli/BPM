@@ -1,10 +1,11 @@
 import Head from '@/components/infra/Head'
 import Link from '../../components/infra/Link'
-import getData  from '../../services/index'
 import Header from '@/components/infra/Header'
 
 export async function getStaticProps(context) {
-    const data = await getData()
+    const data = {
+        data: []
+    }
 
     const posts = data.data
 
