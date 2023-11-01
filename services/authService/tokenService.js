@@ -1,7 +1,7 @@
 import nookies from "nookies"
 import jwt from 'jsonwebtoken';
 
-const ACCESS_TOKEN_KEY = 'accessToken'
+const ACCESS_TOKEN_KEY = 'access_token'
 const ONE_SECOND = 1
 const TEN_SECONDES = 10 * ONE_SECOND
 const ONE_MINUTE = 60 * ONE_SECOND
@@ -35,7 +35,11 @@ export const tokenService = {
     delete(ctx=null){
         globalThis?.sessionStorage?.removeItem(ACCESS_TOKEN_KEY)
         globalThis?.localStorage?.removeItem(ACCESS_TOKEN_KEY)
-        nookies.destroy(ctx, ACCESS_TOKEN_KEY)
+        nookies.destroy(ctx, ACCESS_TOKEN_KEY, {
+            path: '/',
+            maxAge: ONE_YEAR,
+            sameSite: 'lax'
+        })
         globalThis?.sessionStorage?.removeItem('REFRESH_TOKEN')
         globalThis?.localStorage?.removeItem('REFRESH_TOKEN')
         nookies.destroy(ctx, 'REFRESH_TOKEN')
