@@ -7,9 +7,9 @@ import {
     IDragOptions,
 
 } from '@fluentui/react';
+import { CardCartItem } from "./cartItem/cardCartItem"
 import { CartService } from "../../services/cartService/ui/cartService";
-import { ICartItem } from "../../src/Interfaces/cartItem";
-import { CardCartItem } from './cartItem/cardCartItem'
+import { ICartItem } from "../../src/Interfaces/cartItem"
 
 export default function Cart({ setCartModalState, isOpen }: any) {
 
