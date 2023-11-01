@@ -1,9 +1,9 @@
-import { CartItem } from '../../../src/Interfaces/cartItem';
+import { ICartItem } from '../../../src/Interfaces/cartItem';
 
 
 export class CartService {
     getCart() {
-        let cart: CartItem[] = []
+        let cart: ICartItem[] = []
         if (typeof window !== 'undefined') {
             const item = localStorage.getItem('key')
             cart = JSON.parse(localStorage?.getItem('cart') || '[]')
@@ -11,12 +11,12 @@ export class CartService {
         return cart
     }
 
-    addItemToCart(item: CartItem) {
-        const cart: CartItem[] = this.getCart()
+    addItemToCart(item: ICartItem) {
+        const cart: ICartItem[] = this.getCart()
 
         let exists = false
         
-        cart.find((cartItem: CartItem) => {
+        cart.find((cartItem: ICartItem) => {
             if (cartItem.id == item.id && 
                 cartItem.name == item.name && 
                 cartItem.color == item.color && 
@@ -39,17 +39,17 @@ export class CartService {
     }
 
     getTotal(){
-        const cart: CartItem[] = this.getCart()
+        const cart: ICartItem[] = this.getCart()
         let total = 0
-        cart.forEach((item: CartItem) => {
+        cart.forEach((item: ICartItem) => {
             total += item.price * item.quantity
         })
         return total
     }
 
-    increaseQuantity(item: CartItem){
-        const cart: CartItem[] = this.getCart()
-        cart.find((cartItem: CartItem) => {
+    increaseQuantity(item: ICartItem){
+        const cart: ICartItem[] = this.getCart()
+        cart.find((cartItem: ICartItem) => {
             if (cartItem.id == item.id && 
                 cartItem.color == item.color && 
                 cartItem.size == item.size) {
@@ -59,9 +59,9 @@ export class CartService {
         localStorage.setItem('cart', JSON.stringify(cart))
     }
 
-    decreaseQuantity(item: CartItem){
-        const cart: CartItem[] = this.getCart()
-        cart.find((cartItem: CartItem) => {
+    decreaseQuantity(item: ICartItem){
+        const cart: ICartItem[] = this.getCart()
+        cart.find((cartItem: ICartItem) => {
             if (cartItem.id == item.id && 
                 cartItem.color == item.color && 
                 cartItem.size == item.size) {
@@ -73,9 +73,9 @@ export class CartService {
         localStorage.setItem('cart', JSON.stringify(cart))
     }
 
-    removeItem(item: CartItem){
-        const cart: CartItem[] = this.getCart()
-        cart.find((cartItem: CartItem) => {
+    removeItem(item: ICartItem){
+        const cart: ICartItem[] = this.getCart()
+        cart.find((cartItem: ICartItem) => {
             if (cartItem.id == item.id && 
                 cartItem.color == item.color && 
                 cartItem.size == item.size) {
