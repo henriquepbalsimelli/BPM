@@ -26,11 +26,16 @@ export const UserRepository = {
         return user
     },
     updateRefreshToken: async (id, refresh_token) => {
-        await db('users').update(
-            {
-                'refresh_token': refresh_token
-            }
-        ).where({ 'id': id })
+        try{
+            await db('users').update(
+                {
+                    'refresh_token': refresh_token
+                }
+            ).where({ 'id': id })
+        }catch(error){
+            console.log(error)
+            throw new Error('Erro ao atualizar refresh token')
+        }
     },
     updateUser: async (userData) => {
         return await db('users').update(

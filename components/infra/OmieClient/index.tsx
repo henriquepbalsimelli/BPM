@@ -10,5 +10,8 @@ export async function OmieClient(url: string, content: Dict){
             { 'Content-Type': 'application/json ' }
         }).then(res => {
           return res.data
-        }).catch(err => { console.error(err) });
+        }).catch(err => {
+          console.error(err)
+          return err
+        });
 }
