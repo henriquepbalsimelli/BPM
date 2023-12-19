@@ -1,4 +1,5 @@
-import { ICartItem } from '../../../src/Interfaces/cartItem';
+import { HttpClient } from '@/components/infra/HttpClient/HttpClient';
+import { ICartItem, ICreateOrderPayload } from '../../../src/Interfaces/cartItem';
 
 
 export class CartService {
@@ -17,8 +18,7 @@ export class CartService {
         let exists = false
         
         cart.find((cartItem: ICartItem) => {
-            if (cartItem.id == item.id && 
-                cartItem.name == item.name && 
+            if (cartItem.name == item.name && 
                 cartItem.color == item.color && 
                 cartItem.size == item.size) {
                 exists = true
@@ -50,8 +50,7 @@ export class CartService {
     increaseQuantity(item: ICartItem){
         const cart: ICartItem[] = this.getCart()
         cart.find((cartItem: ICartItem) => {
-            if (cartItem.id == item.id && 
-                cartItem.color == item.color && 
+            if (cartItem.color == item.color && 
                 cartItem.size == item.size) {
                 cartItem.quantity += 1
             }
@@ -62,8 +61,7 @@ export class CartService {
     decreaseQuantity(item: ICartItem){
         const cart: ICartItem[] = this.getCart()
         cart.find((cartItem: ICartItem) => {
-            if (cartItem.id == item.id && 
-                cartItem.color == item.color && 
+            if (cartItem.color == item.color && 
                 cartItem.size == item.size) {
                     if (cartItem.quantity > 1){
                         cartItem.quantity -= 1
@@ -76,13 +74,26 @@ export class CartService {
     removeItem(item: ICartItem){
         const cart: ICartItem[] = this.getCart()
         cart.find((cartItem: ICartItem) => {
-            if (cartItem.id == item.id && 
-                cartItem.color == item.color && 
+            if (cartItem.color == item.color && 
                 cartItem.size == item.size) {
                     cart.splice(cart.indexOf(cartItem), 1)
             }
         })
         localStorage.setItem('cart', JSON.stringify(cart))
+    }
+
+    async createOrder(payload: ICreateOrderPayload) {
+        const res = await HttpClient(
+            '/api/orders',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: payload
+            }
+        )
+        return res
     }
 
 }

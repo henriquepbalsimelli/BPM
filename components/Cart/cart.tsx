@@ -10,6 +10,7 @@ import {
 import CardCartItem from "../cartItem/index"
 import { CartService } from "../../services/cartService/ui/cartService";
 import { ICartItem } from "../../src/Interfaces/cartItem"
+import { authService } from "../../services/authService/ui/authService";
 
 export default function Cart({ setCartModalState, isOpen }: any) {
 
@@ -38,6 +39,42 @@ export default function Cart({ setCartModalState, isOpen }: any) {
         }),
         [keepInBounds],
     );
+
+    const handleCreateOrder = async () => {
+        try{
+
+            const cartItems = cartService.getCart()
+            if (cartItems.length == 0) {
+                return
+            }
+    
+            let userData = await authService.getSessionClientSide()
+            if (!userData) {
+                return
+            }
+            const items = []
+            for (let item of cartItems) {
+                items.push({
+                    productCode: item.product_code,
+                    quantity: item.quantity
+                })
+            }
+
+            const payload = {
+                items: items,
+                userId: userData.id
+            }
+
+            console.log(payload)
+
+            const response = await cartService.createOrder(payload)
+            console.log(response)
+        
+        }catch(error: any){
+            console.log(error)
+            throw new Error(error?.message || "Erro ao finalizar compra")
+        }
+    }
 
 
     return (
@@ -74,7 +111,7 @@ export default function Cart({ setCartModalState, isOpen }: any) {
                         cart.map((item: ICartItem) => {
                             return (
                                 <CardCartItem
-                                    key={item.id}
+                                    key={item.product_code}
                                     item={item}
                                     setTotal={setTotal}
                                     cart={cart}
@@ -97,7 +134,9 @@ export default function Cart({ setCartModalState, isOpen }: any) {
                     >Limpar carrinho</S.ClearCartButton>
                     <S.FinishCartButton
                         onClick={() => {
-                            
+
+                            handleCreateOrder()
+                           
                         }}
                     >Finalizar compra</S.FinishCartButton>
                 </S.ButtonsDiv>

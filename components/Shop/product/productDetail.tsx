@@ -171,7 +171,8 @@ export default function ProductDetail(data: any) {
                                                     {
                                                         ...selectedProduct,
                                                         size: value?.text,
-                                                        selectedSize: value
+                                                        selectedSize: value,
+                                                        product_code: value?.key
                                                     }
                                                 )
                                             }
