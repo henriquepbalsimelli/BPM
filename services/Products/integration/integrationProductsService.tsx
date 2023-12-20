@@ -16,7 +16,7 @@ export class ProductIntegrationService {
                 {
                     "nPagina": 1,
                     "nRegPorPagina": 50,
-                    "dDataPosicao": "24/10/2023",
+                    "dDataPosicao": new Date().toLocaleDateString('pt-BR'),
                     "cExibeTodos": "N",
                     "codigo_local_estoque": 0
                 }
