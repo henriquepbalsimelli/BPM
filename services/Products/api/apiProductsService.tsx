@@ -40,7 +40,8 @@ export class ApiProductsService {
                         price: productInfo.unit_value,
                         color: colorObject?.content,
                         size: sizeObject?.content,
-                        product_code: productInfo.product_code
+                        product_code: productInfo.product_code,
+                        available_qty: product.nSaldo
                     } 
                     existingFamily.variations.push(variation)
                 }
@@ -49,7 +50,8 @@ export class ApiProductsService {
                         price: productInfo.unit_value,
                         color: colorObject?.content,
                         size: sizeObject?.content,
-                        product_code: productInfo.product_code
+                        product_code: productInfo.product_code,
+                        available_qty: product.nSaldo
                     } 
                     const familyData: FamilyProductInterface  = {
                         familyCode: productInfo.family_code,
@@ -87,6 +89,8 @@ export class ApiProductsService {
 
             const productsByFamily: any = await productIntegrationService.getProductsByFamily(familyCode)
 
+            const productStock = await productIntegrationService.getProductStock()
+
             const productFamilyDict: FamilyProductInterface = {
                 familyCode: familyCode,
                 familyDescription: null,
@@ -95,9 +99,15 @@ export class ApiProductsService {
             }
 
             productsByFamily.product_service_registered?.map((product: any) => {
+                const productStockInfo = productStock.produtos.find((productStock: ProductStock) => {
+                    return productStock.nCodProd === product.product_code
+                })
+                if (!productStockInfo) {
+                    return null
+                }
 
                 if (!productFamilyDict.familyDescription) {
-                    productFamilyDict['familyDescription'] = product.familyDescription
+                    productFamilyDict['familyDescription'] = product.family_description
                     productFamilyDict['price'] = product.unit_value
                 }
 
@@ -113,9 +123,12 @@ export class ApiProductsService {
                     price: product.unit_value,
                     color: colorObject?.content,
                     size: sizeObject?.content,
-                    product_code: product.product_code
-                } 
-                productFamilyDict.variations.push(variation)
+                    product_code: product.product_code,
+                    available_qty: productStockInfo.nSaldo
+                }
+                if (variation.available_qty != 0) {
+                    productFamilyDict.variations.push(variation)
+                }
                 
             })
 

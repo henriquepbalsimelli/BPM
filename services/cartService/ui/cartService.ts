@@ -74,9 +74,8 @@ export class CartService {
     removeItem(item: ICartItem){
         const cart: ICartItem[] = this.getCart()
         cart.find((cartItem: ICartItem) => {
-            if (cartItem.color == item.color && 
-                cartItem.size == item.size) {
-                    cart.splice(cart.indexOf(cartItem), 1)
+            if (cartItem.product_code == item.product_code) {
+                cart.splice(cart.indexOf(cartItem), 1)
             }
         })
         localStorage.setItem('cart', JSON.stringify(cart))
