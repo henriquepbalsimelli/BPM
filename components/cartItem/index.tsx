@@ -48,9 +48,11 @@ export default function CardCartItem({ item, key, setTotal, cart, setCart }: { i
                             <S.PlusIcon iconName="CalculatorAddition" 
                                 onClick={() => {
                                     const cartService = new CartService()
-                                    cartService.increaseQuantity(item)
-                                    setQuantity(quantity + 1)
-                                    setTotal(cartService.getTotal())
+                                    const itemQty = cartService.increaseQuantity(item)
+                                    if (itemQty){
+                                        setQuantity(itemQty)
+                                        setTotal(cartService.getTotal())
+                                    }
                                 }}
                             />
                         </S.QuantityInputDiv>

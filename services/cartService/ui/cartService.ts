@@ -18,9 +18,7 @@ export class CartService {
         let exists = false
         
         cart.find((cartItem: ICartItem) => {
-            if (cartItem.name == item.name && 
-                cartItem.color == item.color && 
-                cartItem.size == item.size) {
+            if (cartItem.product_code == item.product_code) {
                 exists = true
             }
         })
@@ -49,20 +47,22 @@ export class CartService {
 
     increaseQuantity(item: ICartItem){
         const cart: ICartItem[] = this.getCart()
-        cart.find((cartItem: ICartItem) => {
-            if (cartItem.color == item.color && 
-                cartItem.size == item.size) {
+        const itemIncreased = cart.find((cartItem: ICartItem) => {
+            if (cartItem.product_code == item.product_code && item.availableQty > cartItem.quantity) {
                 cartItem.quantity += 1
+                return cartItem
             }
         })
         localStorage.setItem('cart', JSON.stringify(cart))
+        if (itemIncreased){
+            return itemIncreased?.quantity
+        }
     }
 
     decreaseQuantity(item: ICartItem){
         const cart: ICartItem[] = this.getCart()
         cart.find((cartItem: ICartItem) => {
-            if (cartItem.color == item.color && 
-                cartItem.size == item.size) {
+            if (cartItem.product_code == item.product_code) {
                     if (cartItem.quantity > 1){
                         cartItem.quantity -= 1
                     }

@@ -7,6 +7,7 @@ export interface ICartItem {
     quantity: number
     size: string
     color: string
+    availableQty: number
 }
 
 export interface ICreateOrderItemPayload {

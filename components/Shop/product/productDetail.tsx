@@ -30,7 +30,16 @@ export default function ProductDetail(data: any) {
     }, [])
 
     const handleAddCartItem = (product: any) => {
-        new CartService().addItemToCart(product)
+        const newItem = {
+            product_code: product.product_code,
+            name: product.familyDescription,
+            price: product.price,
+            quantity: 1,
+            size: product.size,
+            color: product.color,
+            availableQty: product.availableQty
+        }
+        new CartService().addItemToCart(newItem)
     }
 
     const findSizes = useCallback((color: any) => {
@@ -147,7 +156,8 @@ export default function ProductDetail(data: any) {
                                                                             ...selectedProduct,
                                                                             color: color,
                                                                             size: null,
-                                                                            product_code: null
+                                                                            product_code: null,
+                                                                            availableQty: null
                                                                         }
                                                                     )
                                                                 }
@@ -167,12 +177,18 @@ export default function ProductDetail(data: any) {
                                         onChange={(e, value) => {
                                             const newSize = value?.text
                                             if (newSize) {
+                                                
+                                                const availableQty = selectedProduct?.variations?.find((variation: any) => {
+                                                    return variation.product_code == value.key
+                                                })?.available_qty
+                                                
                                                 setSelectedProduct(
                                                     {
                                                         ...selectedProduct,
                                                         size: value?.text,
                                                         selectedSize: value,
-                                                        product_code: value?.key
+                                                        product_code: value?.key,
+                                                        availableQty: availableQty
                                                     }
                                                 )
                                             }

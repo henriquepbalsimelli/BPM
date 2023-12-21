@@ -65,10 +65,7 @@ export default function Cart({ setCartModalState, isOpen }: any) {
                 userId: userData.id
             }
 
-            console.log(payload)
-
             const response = await cartService.createOrder(payload)
-            console.log(response)
         
         }catch(error: any){
             console.log(error)
